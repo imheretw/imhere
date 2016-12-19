@@ -1,0 +1,14 @@
+extends layout/base
+
+block head
+  title= title
+
+block body
+  h1= title
+  h3 found a total of #[span#count= movies.length] movie(s):
+  div#movie-list
+    ul.list
+      each movie in movies
+        li.movie
+          a(href='#{movie.url}')= movie.title + ' (' + movie.year + ')'
+          p= movie.text

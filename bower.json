@@ -1,0 +1,13 @@
+{
+  "name": "imhere",
+  "version": "0.1.0",
+  "description": "imhere",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "presets": ["es2015", "es2016", "es2017"],
+  "env": {
+    "development": {
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./src/app", "./src/lib", "./src", "./test"],
+          "alias": {
+            "db": "./db",
+          }
+        }],
+        [
+          "transform-runtime", {
+            "polyfill": true,
+            "regenerator": true,
+          },
+        ],
+      ]
+    }
+  }
+}

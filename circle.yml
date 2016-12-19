@@ -1,0 +1,21 @@
+machine:
+  timezone:
+    America/Los_Angeles # Set the timezone
+  pre:
+    - mkdir ~/.yarn-cache
+  node:
+    version: 6.2.2
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - sudo apt install bcrypt
+  cache_directories:
+    - ~/.yarn-cache
+  override:
+    - yarn install
+    - npm rebuild
+    - cp .env.sample .env
+test:
+  override:
+    - yarn test:debug

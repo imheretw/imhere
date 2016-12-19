@@ -1,0 +1,14 @@
+extends layout/base
+
+block head
+  title= title
+
+block body
+  h1= title
+  p Welcome to #{title}!
+
+  h2= 'more links'
+  p
+    a(href='/movies')= 'movies'
+  p
+    a(href='/extras')= 'extras'

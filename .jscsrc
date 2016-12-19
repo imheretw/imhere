@@ -1,0 +1,22 @@
+{
+  "preset": "airbnb",
+
+  "safeContextKeyword": false,
+  "requireTrailingComma": false,
+  "maximumLineLength": {
+    "allExcept": [
+      "comments", "regex", "functionSignature"
+    ],
+    "value": 120
+  },
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
+  "requireSpacesInAnonymousFunctionExpression": false,
+  "requirePaddingNewLinesAfterBlocks": {
+    "allExcept": ["inCallExpressions", "inNewExpressions", "inArrayExpressions",
+      "inProperties", "singleLine"
+    ]
+  },
+
+  "disallowQuotedKeysInObjects": false,
+  "requirePaddingNewLinesBeforeLineComments": false
+}
