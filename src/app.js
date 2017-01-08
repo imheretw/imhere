@@ -34,7 +34,7 @@ const app = express();
 // path to root directory of this app
 const rootPath = path.normalize(__dirname);
 
-// start backgroun jobs handler
+// start background jobs handler
 new JobHandler().start();
 
 // use pug and set views and static directories
