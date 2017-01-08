@@ -27,6 +27,35 @@ Node.js web developer is now easily to start developing web application in minut
 * Debugger (node-inspector)
 * Support Background Jobs (Kue.js)
 
+# Install
+
+
+```shell
+> npm install -g yarn
+```
+
+```
+> yarn
+> bower i
+```
+
+# Up and Running
+```
+> yarn start
+yarn start v0.18.1
+$ gulp serve 
+[19:25:50] Requiring external module babel-register
+[19:25:50] Using gulpfile ~/projects/nodejs/imhere/gulpfile.babel.js
+[19:25:51] Starting 'styles'...
+[19:25:51] Starting 'images'...
+[19:25:51] Starting 'attachments'...
+[19:25:51] Starting 'lint:scripts'...
+[19:25:51] Starting 'files'...
+[19:25:51] Starting 'fonts'...
+....
+2017-01-08T11:25:54.207Z - info: listening on port 5000
+```
+
 # Available Commands
 * **`yarn start`** starting web server on local machine.
 * testing
