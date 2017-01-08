@@ -26,3 +26,17 @@ Node.js web developer is now easily to start developing web application in minut
 * Live Reload For Development
 * Debugger (node-inspector)
 * Support Background Jobs (Kue.js)
+
+# Available Commands
+* **`yarn start`** starting web server on local machine.
+* testing
+  * **`yarn test`** run testcases with sqlite
+  * **`yarn test:debug`** run testcase with sqlite and more debug logs
+  * **`yarn test:mysql`** run testcase with mysql
+  * **`yarn test:mysql:debug`** run testcase with mysql and more debug logs
+* database
+  * **`yarn db:create`** create database
+  * **`yarn db:drop`** drop database
+  * **`yarn db:migrate`** run database schema migration
+  * **`yarn db:rollback`** rollback last schema migration
+  * **`yarn db:seed`** generate seed data into database
