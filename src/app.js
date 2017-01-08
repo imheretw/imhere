@@ -12,6 +12,7 @@ import helmet from 'helmet';
 import passport from 'passport';
 import params from 'strong-params';
 import dotenv from 'dotenv';
+import kue from 'kue';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ import controllers from './app/controllers';
 import logger from './lib/logger';
 import database from './database';
 import config from './config/appConfig';
+import JobHandler from './app/boots/JobHandler';
 
 // Add global
 global.logger = logger;
@@ -31,6 +33,9 @@ const app = express();
 
 // path to root directory of this app
 const rootPath = path.normalize(__dirname);
+
+// start background jobs handler
+new JobHandler().start();
 
 // use pug and set views and static directories
 app.set('view engine', 'pug');
@@ -53,6 +58,10 @@ app.use(compress());
 app.use(cookieParser());
 app.use(helmet());
 app.use(params.expressMiddleware());
+
+// use kue for background jobs handler
+// visit http://localhost:5000/kue to see queued background jobs
+app.use('/kue', kue.app);
 
 // passport for authenticate
 app.use(passport.initialize());

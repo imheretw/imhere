@@ -48,13 +48,21 @@ const PATHS = {
     src: path.join(SRC, 'app.js'),
     dest: DEST,
   },
-  database: {
-    src: path.join(SRC, 'database.js'),
-    dest: DEST,
+  boots: {
+    src: path.join(SRC, 'app/boots/**/*.js'),
+    dest: path.join(DEST, 'app/boots'),
   },
   configDir: {
     src: path.join(SRC, 'config/**/*.js'),
     dest: path.join(DEST, 'config/'),
+  },
+  database: {
+    src: path.join(SRC, 'database.js'),
+    dest: DEST,
+  },
+  jobs: {
+    src: path.join(SRC, 'app/jobs/**/*.js'),
+    dest: path.join(DEST, 'app/jobs'),
   },
   models: {
     src: path.join(SRC, 'app/models/**/*.js'),
