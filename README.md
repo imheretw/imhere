@@ -32,6 +32,7 @@ Node.js web developer is now easily to start developing web application in minut
 
 ```shell
 > npm install -g yarn
+> npm install -g bower
 ```
 
 ```
