@@ -13,24 +13,21 @@ const expiresIn = 60 * 60 * 24 * 30;
 /*
 *  GET /users
 */
-router.get('/', (req, res, next) => {
-  User
-    .forge()
-    .orderBy('name')
-    .fetchPage({
-      page: req.query.page || 1,
-      pageSize: req.query.size || 50,
-    })
-    .then((users) => {
-      res.json({
-        users,
-        pagination: users.pagination,
-      });
-    })
-    .catch((err) => {
-      logger.error('failed to get users', err);
-      res.status(500).send(err);
-    });
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User
+                .forge()
+                .orderBy('name')
+                .fetchPage({
+                  page: req.query.page || 1,
+                  pageSize: req.query.size || 50,
+                });
+
+    res.json({ users, pagination: users.pagination });
+  } catch (error) {
+    logger.error('failed to get users', error);
+    res.status(500).send(error);
+  }
 });
 
 /*
