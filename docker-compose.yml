@@ -1,0 +1,18 @@
+mysql:
+  image: mysql:5.7.12
+  environment:
+    MYSQL_ROOT_PASSWORD: mysql
+  ports:
+    - 3306:3306
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  links: 
+    - mysql
+  environment:
+    PMA_HOST: mysql
+  ports:
+    - 8080:80
+redis:
+  image: redis:3.0.7
+  ports:
+    - 6379:6379 
