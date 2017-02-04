@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import logger from 'logger';
 import Job from './Job';
 
@@ -7,10 +5,10 @@ export default class MyJob extends Job {
   constructor() {
     super();
 
-    this.QUEUE_NAME = 'email';
+    this.QUEUE_NAME = 'job: my job';
   }
 
-  run(job, done) {
+  async run(job) {
     // you should implement the run method.
     logger.debug(`run my job`);
   }

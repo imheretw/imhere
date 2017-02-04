@@ -17,9 +17,15 @@ export default class Job {
   }
 
   init() {
-    this.queue.process(this.QUEUE_NAME, this.CUNCURRENCY, (job, done) => {
+    this.queue.process(this.QUEUE_NAME, this.CUNCURRENCY, async (job, done) => {
       logger.debug(`job ${job.id} in queue ${this.QUEUE_NAME} is processing now.`);
-      this.run(job, done);
+      try {
+        await this.run(job);
+        done();
+      } catch (error) {
+        logger.error(`Error when runing job of ${this.constructor.name}:`, error);
+        done(error);
+      }
     });
   }
 

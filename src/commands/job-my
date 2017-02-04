@@ -1,0 +1,9 @@
+#!/usr/bin/env babel-node
+
+import logger from 'logger';
+import MyJob from 'jobs/MyJob';
+
+var job = new MyJob();
+job.register().then(() => {
+  job.shutdown();
+});

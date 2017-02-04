@@ -16,6 +16,7 @@ Node.js web developer is now easily to start developing web application in minut
   * jwt
   * passport
 * Logger (winston)
+* Commands (commander)
 * Database schema migration (knex.js)
 * Unit Test Integrations
   * mocha: javascript testing framework
@@ -48,6 +49,7 @@ Install tools
 ```shell
 > npm install -g yarn
 > npm install -g bower
+> npm install -g bable-cli
 ```
 
 Install npm and bower packages
@@ -119,6 +121,10 @@ Test sample API
 }
 ```
 
+Kue page: http://localhost:5000/kue
+
+![kue](https://cloud.githubusercontent.com/assets/1978357/22617555/34ee1780-eb03-11e6-998d-01557f517763.png)
+
 # Available Commands
 * **`yarn start`** starting web server on local machine.
 * testing
@@ -132,3 +138,5 @@ Test sample API
   * **`yarn db:migrate`** run database schema migration
   * **`yarn db:rollback`** rollback last schema migration
   * **`yarn db:seed`** generate seed data into database
+* custom commands
+  * **`yarn command:job:my`** run sample job
