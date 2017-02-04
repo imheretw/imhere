@@ -13,7 +13,7 @@ const expiresIn = 60 * 60 * 24 * 30;
 /*
 *  GET /users
 */
-router.get('/', async (req, res, next) => {
+router.get('/', wrap(async (req, res, next) => {
   try {
     const users = await User
                 .forge()
@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
     logger.error('failed to get users', error);
     res.status(500).send(error);
   }
-});
+}));
 
 /*
 *  POST /users
