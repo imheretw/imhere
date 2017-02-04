@@ -34,18 +34,43 @@ Node.js web developer is now easily to start developing web application in minut
 
 # Install
 
+## Environment
 
+Install tools
 ```shell
 > npm install -g yarn
 > npm install -g bower
 ```
 
+Install npm and bower packages
 ```
 > yarn
 > bower i
 ```
 
+## Config
+
+Copy `.env.sample` to `.env` and change the setting
+```shell
+> cp .env.sample .env
+```
+
+## Prepare for database
+
+Migration
+```shell
+> yarn db:create
+> yarn db:migrate
+```
+
+Seed
+```shell
+> yarn db:seed
+```
+
 # Up and Running
+
+Start the service
 ```
 > yarn start
 yarn start v0.18.1
@@ -60,6 +85,30 @@ $ gulp serve
 [19:25:51] Starting 'fonts'...
 ....
 2017-01-08T11:25:54.207Z - info: listening on port 5000
+```
+
+Test sample API
+```json
+> curl http://localhost:5000/api/users
+
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Test",
+      "email": "test@test.com",
+      "encrypted_password": "$2a$06$NkYh0RCM8pNWPaYvRLgN9.Tl30VHCXEDh66RKnuDJNBV0RLQSypWa",
+      "created_at": "2017-02-04T08:33:18.000Z",
+      "updated_at": "2017-02-04T08:33:18.000Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 50,
+    "rowCount": 1,
+    "pageCount": 1
+  }
+}
 ```
 
 # Available Commands
