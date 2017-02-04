@@ -1,6 +1,6 @@
 # ImHere ![CircleCI Build Status](https://circleci.com/gh/imheretw/imhere.svg?style=shield&circle-token=86e04f476d21b9b2164053879588dc4e676fc520)
 
-We integrated most popular and widely used packages for web development.  
+We integrated most popular and widely used packages for web development.
 Node.js web developer is now easily to start developing web application in minutes just like other web frameworks such as Laravel, Rails ...etc.
 
 # Integrated Features
@@ -14,7 +14,7 @@ Node.js web developer is now easily to start developing web application in minut
 * Configuration Settings (dotenv)
 * User Authentication
   * jwt
-  * passport  
+  * passport
 * Logger (winston)
 * Database schema migration (knex.js)
 * Unit Test Integrations
@@ -26,6 +26,11 @@ Node.js web developer is now easily to start developing web application in minut
 * Live Reload For Development
 * Debugger (node-inspector)
 * Support Background Jobs (Kue.js)
+
+# Prerequisite
+  - redis 3.0+
+  - mysql 5.6+
+  - Node 6+
 
 # Install
 
@@ -44,7 +49,7 @@ Node.js web developer is now easily to start developing web application in minut
 ```
 > yarn start
 yarn start v0.18.1
-$ gulp serve 
+$ gulp serve
 [19:25:50] Requiring external module babel-register
 [19:25:50] Using gulpfile ~/projects/nodejs/imhere/gulpfile.babel.js
 [19:25:51] Starting 'styles'...

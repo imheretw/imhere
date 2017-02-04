@@ -22,6 +22,10 @@
     "eslint-pre-commit": "./scripts/eslint-pre-commit.sh",
     "jscs-pre-commit": "./scripts/jscs-pre-commit.sh"
   },
+  "pre-commit": [
+    "eslint-pre-commit",
+    "jscs-pre-commit"
+  ],
   "dependencies": {
     "async": "^2.1.2",
     "bcrypt": "^0.8.7",
@@ -112,9 +116,5 @@
     "vinyl-fs": "^2.4.3"
   },
   "eslint-pre-commit": "./scripts/eslint-pre-commit.sh",
-  "jscs-pre-commit": "./scripts/jscs-pre-commit.sh",
-  "pre-commit": [
-    "eslint-pre-commit",
-    "jscs-pre-commit"
-  ]
+  "jscs-pre-commit": "./scripts/jscs-pre-commit.sh"
 }
