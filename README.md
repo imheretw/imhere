@@ -27,11 +27,15 @@ Node.js web developer is now easily to start developing web application in minut
 * Live Reload For Development
 * Debugger (node-inspector)
 * Support Background Jobs (Kue.js)
+* Deployment
+  * Capistrano (Ruby gem)
+  * pm2 (Production process manager for Node.js)
 
 # Prerequisite
   - redis 3.0+
   - mysql 5.6+
   - Node 6+
+  - Ruby 2.0+ (For deploy)
 
 # Install
 
@@ -49,7 +53,10 @@ Install tools
 ```shell
 > npm install -g yarn
 > npm install -g bower
-> npm install -g bable-cli
+> npm install -g bable-cli # for commands
+> npm install -g pm2 # for deployment environment
+> gem install bundler # for capistrano to deploy
+> bundle install # for capistrano to deploy
 ```
 
 Install npm and bower packages
@@ -140,3 +147,8 @@ Kue page: http://localhost:5000/kue
   * **`yarn db:seed`** generate seed data into database
 * custom commands
   * **`yarn command:job:my`** run sample job
+* deployment
+  * **`cap localhost deploy`** deploy to localhost
+  * **`cap dev deploy`** deploy to dev server
+  * **`cap staging deploy`** deploy to staging server
+  * **`cap production deploy`** deploy to production server
