@@ -9,12 +9,16 @@ import { Router } from 'express';
 import config from 'config/appConfig';
 import User from 'models/user';
 import usersController from './api/usersController';
+import githubController from './api/githubController';
 
 // create router
 const router = Router();
 
 // api router
 router.use((req, res, next) => {
+  if (req.path === '/') {
+    return next();
+  }
 
   // TODO: refactoring verify jwt token, is it possible add requiredLogin setting to each API?
   if (req.path === '/api/users/login') {
@@ -22,6 +26,10 @@ router.use((req, res, next) => {
   }
 
   if (req.path === '/api/users') {
+    return next();
+  }
+
+  if (req.path.match(/^\/api\/github\/.*/)) {
     return next();
   }
 
@@ -59,6 +67,7 @@ router.use((req, res, next) => {
 
 // load other controllers
 router.use('/api/users', usersController);
+router.use('/api/github', githubController);
 
 // set basic routes
 router.get('/', (req, res, next) => res.render('index', {

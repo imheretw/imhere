@@ -104,7 +104,7 @@ $ gulp serve
 2017-01-08T11:25:54.207Z - info: listening on port 5000
 ```
 
-Test sample API
+Test users API
 ```json
 > curl http://localhost:5000/api/users
 
@@ -125,6 +125,58 @@ Test sample API
     "rowCount": 1,
     "pageCount": 1
   }
+}
+```
+
+Test github API
+```json
+> curl http://localhost:5000/api/github/closed_issues
+{
+  "issues": [{
+    "url": "https://api.github.com/repos/imheretw/imhere/issues/4",
+    "repository_url": "https://api.github.com/repos/imheretw/imhere",
+    "labels_url": "https://api.github.com/repos/imheretw/imhere/issues/4/labels{/name}",
+    "comments_url": "https://api.github.com/repos/imheretw/imhere/issues/4/comments",
+    "events_url": "https://api.github.com/repos/imheretw/imhere/issues/4/events",
+    "html_url": "https://github.com/imheretw/imhere/issues/4",
+    "id": 205337147,
+    "number": 4,
+    "title": "Kue screenshot",
+    "user": {
+      "login": "koshuang",
+      "id": 1978357,
+      "avatar_url": "https://avatars.githubusercontent.com/u/1978357?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/koshuang",
+      "html_url": "https://github.com/koshuang",
+      "followers_url": "https://api.github.com/users/koshuang/followers",
+      "following_url": "https://api.github.com/users/koshuang/following{/other_user}",
+      "gists_url": "https://api.github.com/users/koshuang/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/koshuang/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/koshuang/subscriptions",
+      "organizations_url": "https://api.github.com/users/koshuang/orgs",
+      "repos_url": "https://api.github.com/users/koshuang/repos",
+      "events_url": "https://api.github.com/users/koshuang/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/koshuang/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2017-02-04T09:56:19Z",
+    "updated_at": "2017-02-04T10:05:02Z",
+    "closed_at": "2017-02-04T10:05:02Z",
+    "body": "![kue](https://cloud.githubusercontent.com/assets/1978357/22617555/34ee1780-eb03-11e6-998d-01557f517763.png)\r\n"
+  }]
 }
 ```
 
