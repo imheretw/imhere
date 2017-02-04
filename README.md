@@ -36,6 +36,14 @@ Node.js web developer is now easily to start developing web application in minut
 
 ## Environment
 
+Startup services
+```shell
+> docker-compose up -d
+Creating imhere_redis_1
+Creating imhere_mysql_1
+Creating imhere_phpmyadmin_1
+```
+
 Install tools
 ```shell
 > npm install -g yarn
