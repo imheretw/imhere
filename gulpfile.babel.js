@@ -64,6 +64,10 @@ const PATHS = {
     src: path.join(SRC, 'app/jobs/**/*.js'),
     dest: path.join(DEST, 'app/jobs'),
   },
+  middlewares: {
+    src: path.join(SRC, 'app/middlewares/**/*.js'),
+    dest: path.join(DEST, 'app/middlewares'),
+  },
   models: {
     src: path.join(SRC, 'app/models/**/*.js'),
     dest: path.join(DEST, 'app/models'),

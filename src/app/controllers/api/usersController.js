@@ -4,6 +4,7 @@ import passport from 'passport';
 import bcrypt from 'bcrypt';
 
 import User from 'models/user';
+import jwtMiddleware from 'middlewares/jwtMiddleware';
 import config from 'config/appConfig';
 import wrap from 'helpers/wrap';
 
@@ -73,6 +74,6 @@ router.post('/login', (req, res, next) => {
 /*
 *  GET /users/current
 */
-router.get('/current', (req, res, next) => res.json(req.user));
+router.get('/current', jwtMiddleware, (req, res, next) => res.json(req.user));
 
 export default router;
