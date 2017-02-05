@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "gulp serve",
-    "test:core": "PORT=4000 node_modules/.bin/mocha --compilers js:babel-core/register -r test/init --recursive test -t 10000",
+    "test:core": "PORT=4000 node_modules/.bin/nyc node_modules/.bin/mocha --compilers js:babel-core/register -r test/init --recursive test -t 10000",
     "test:core:debug": "DEBUG_LEVEL=debug DEBUG=knex:query,knex:bindings,nock.* npm run test:core",
     "test": "NODE_ENV=test npm run test:core",
     "test:debug": "NODE_ENV=test npm run test:core:debug",
@@ -113,10 +113,24 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "nock": "^9.0.2",
+    "nyc": "^10.1.2",
     "pre-commit": "^1.1.3",
     "sinon": "^1.17.6",
     "sqlite3": "^3.1.8",
     "vinyl-fs": "^2.4.3"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
   },
   "eslint-pre-commit": "./scripts/eslint-pre-commit.sh",
   "jscs-pre-commit": "./scripts/jscs-pre-commit.sh"

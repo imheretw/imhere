@@ -8,3 +8,6 @@
 /npm-debug.log
 /yarn-error.log
 /.env
+
+/.nyc_output
+/coverage

@@ -24,6 +24,7 @@ Node.js web developer is now easily to start developing web application in minut
   * factory-girl: db data generation for test
   * sinon: stub & mock for unit test
   * nock: web mock
+  * nyc: code coverage
 * Live Reload For Development
 * Debugger (node-inspector)
 * Support Background Jobs (Kue.js)
