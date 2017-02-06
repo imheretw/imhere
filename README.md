@@ -16,6 +16,7 @@ Node.js web developer is now easily to start developing web application in minut
   * jwt
   * passport
 * Logger (winston)
+  * add prefix to make debug easier
 * Commands (commander)
 * Database schema migration (knex.js)
 * Unit Test Integrations
@@ -102,7 +103,7 @@ $ gulp serve
 [19:25:51] Starting 'files'...
 [19:25:51] Starting 'fonts'...
 ....
-2017-01-08T11:25:54.207Z - info: listening on port 5000
+2017-01-08T11:25:54.207Z - info: App: listening on port 5000
 ```
 
 Test users API
