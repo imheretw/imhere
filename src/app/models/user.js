@@ -1,10 +1,13 @@
 import bcrypt from 'bcrypt';
 import { ModelBase } from '../../database';
 import config from 'config/appConfig';
+import Logger from 'logger';
 
 export const TYPE_DEMO_USER = 'DemoUser';
 export const TYPE_LIMITED_ACCESS_USER = 'LimitedAccessUser';
 export const FULL_ACCESS_USER = 'FullAccessUser';
+
+const logger = Logger('User');
 
 const User = ModelBase.extend({
   tableName: 'users',

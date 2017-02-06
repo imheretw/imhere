@@ -1,6 +1,8 @@
+import Logger from 'logger';
 import GithubApi from 'github';
 
 const github = new GithubApi();
+const logger = Logger('GithubService');
 
 export const GITHUB_API_BASE_URL = 'https://api.github.com';
 export const GITHUB_API_ENDPOINTS = {

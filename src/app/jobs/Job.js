@@ -1,10 +1,12 @@
 import kue from 'kue';
 
-import logger from 'logger';
+import Logable from 'Logable';
 import kueConfig from '../../config/kueConfig';
 
-export default class Job {
+export default class Job extends Logable {
   constructor() {
+    super();
+
     // you can customize below attributes of your jobs
     this.QUEUE_NAME = 'default';
     this.CUNCURRENCY = 10;
@@ -13,17 +15,17 @@ export default class Job {
     this.BACKOFF = null;
 
     this.queue = kue.createQueue(kueConfig);
-    logger.debug(`queue '${this.QUEUE_NAME}' is created.`);
+    this.logger.debug(`queue '${this.QUEUE_NAME}' is created.`);
   }
 
   init() {
     this.queue.process(this.QUEUE_NAME, this.CUNCURRENCY, async (job, done) => {
-      logger.debug(`job ${job.id} in queue ${this.QUEUE_NAME} is processing now.`);
+      this.logger.debug(`job ${job.id} in queue ${this.QUEUE_NAME} is processing now.`);
       try {
         await this.run(job);
         done();
       } catch (error) {
-        logger.error(`Error when runing job of ${this.constructor.name}:`, error);
+        this.logger.error(`Error when runing job of ${this.constructor.name}:`, error);
         done(error);
       }
     });
@@ -42,7 +44,7 @@ export default class Job {
             reject(error);
           }
 
-          logger.info(`register job ${this.QUEUE_NAME}: ${job.id}`, data);
+          this.logger.info(`register job ${this.QUEUE_NAME}: ${job.id}`, data);
           resolve(job);
         });
     });
@@ -57,13 +59,13 @@ export default class Job {
   }
 
   shutdown() {
-    logger.info('[ Shutting down Kue... ]');
+    this.logger.info('[ Shutting down Kue... ]');
     this.queue.shutdown(function(err) {
       if (err) {
-        logger.error('[ Failed to shut down Kue. ]');
+        this.logger.error('[ Failed to shut down Kue. ]');
       }
 
-      logger.info('[ Kue is shut down. ]');
+      this.logger.info('[ Kue is shut down. ]');
     });
   }
 }

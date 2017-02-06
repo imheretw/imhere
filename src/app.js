@@ -19,13 +19,12 @@ dotenv.config();
 // local
 import './config/passportConfig';
 import controllers from './app/controllers';
-import logger from './lib/logger';
+import Logger from './lib/logger';
 import database from './database';
 import config from './config/appConfig';
 import JobHandler from './app/boots/JobHandler';
 
-// Add global
-global.logger = logger;
+const logger = Logger('App');
 
 // EXPRESS SET-UP
 // create app

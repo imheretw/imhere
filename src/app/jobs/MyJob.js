@@ -1,4 +1,3 @@
-import logger from 'logger';
 import Job from './Job';
 
 export default class MyJob extends Job {
@@ -10,7 +9,7 @@ export default class MyJob extends Job {
 
   async run(job) {
     // you should implement the run method.
-    logger.debug(`run my job`);
+    this.logger.debug(`run my job`);
   }
 
   // addtional required arguments for job handler

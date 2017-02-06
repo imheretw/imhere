@@ -7,7 +7,9 @@ import User from 'models/user';
 import jwtMiddleware from 'middlewares/jwtMiddleware';
 import config from 'config/appConfig';
 import wrap from 'helpers/wrap';
+import Logger from 'logger';
 
+const logger = Logger('UserController');
 const router = Router();
 const expiresIn = 60 * 60 * 24 * 30;
 
