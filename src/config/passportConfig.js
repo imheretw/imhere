@@ -19,34 +19,28 @@ passport.deserializeUser((id, done) => {
 /**
  * Sign in using Email and Password.
  */
-passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   const ERROR_MSG = 'Account or password error.';
+  const errorCallback = (done) => done(null, false, { msg: ERROR_MSG });
+  const user = await User.forge({ email: email.toLowerCase() }).fetch();
 
-  User
-    .forge({
-      email: email.toLowerCase(),
-    }).fetch()
-    .then((user) => {
-      if (!user) {
-        return done(null, false, { msg: ERROR_MSG });
-      }
+  if (!user) {
+    return errorCallback(done);
+  }
 
-      // Validate user password
-      return user.validatePassword(password, (err, isValid) => {
-        if (err) {
-          return done(null, false, {
-            msg: ERROR_MSG,
-          });
-        }
+  // Validate user password
+  user.validatePassword(password, (err, isValid) => {
+    if (err) {
+      return errorCallback(done);
+    }
 
-        // If the password was not valid
-        if (!isValid) {
-          return done(null, false, { msg: ERROR_MSG });
-        }
+    // If the password was not valid
+    if (!isValid) {
+      return errorCallback(done);
+    }
 
-        return done(null, user.toJSON());
-      });
-    });
+    return done(null, user.toJSON());
+  });
 }));
 
 /**
