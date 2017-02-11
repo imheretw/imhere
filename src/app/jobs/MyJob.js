@@ -1,12 +1,6 @@
 import Job from './Job';
 
 export default class MyJob extends Job {
-  constructor() {
-    super();
-
-    this.QUEUE_NAME = 'job: my job';
-  }
-
   async run(job) {
     // you should implement the run method.
     this._log();
