@@ -24,7 +24,7 @@ describe('Test users controller', function () {
 
   describe('GET /api/users', () => {
     it('should return all users', async () => {
-      const res = await chai.request(server)
+      const res = await chai.request(server.expressServer)
         .get('/api/users');
       const users = res.body.users;
       const pagination = res.body.pagination;
@@ -41,7 +41,7 @@ describe('Test users controller', function () {
 
   describe('POST /api/users', () => {
     it('should create a user', async () => {
-      let res = await chai.request(server)
+      let res = await chai.request(server.expressServer)
         .post('/api/users')
         .send({
           email: 'user4@test.com',
@@ -54,7 +54,7 @@ describe('Test users controller', function () {
 
     it('should fail to create a user', async () => {
       try {
-        await chai.request(server)
+        await chai.request(server.expressServer)
           .post('/api/users')
           .send({
             email: 'user1@test.com',
@@ -71,7 +71,7 @@ describe('Test users controller', function () {
 
   describe('POST /api/users/login', () => {
     it('should login successfully', async () => {
-      let res = await chai.request(server)
+      let res = await chai.request(server.expressServer)
         .post('/api/users/login')
         .send({
           email: 'user1@test.com',
@@ -82,7 +82,7 @@ describe('Test users controller', function () {
 
     it('should login fail', async () => {
       try {
-        await chai.request(server)
+        await chai.request(server.expressServer)
           .post('/api/users/login')
           .send({
             email: 'user1@test.com',

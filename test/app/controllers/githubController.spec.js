@@ -16,7 +16,7 @@ describe('Test github controller', function () {
         .get(GITHUB_API_ENDPOINTS.closedIssues(owner, repo))
         .reply(200, githubClosedIssueData);
 
-      const res = await chai.request(server)
+      const res = await chai.request(server.expressServer)
         .get('/api/github/closed_issues');
 
       const issues = res.body.issues;
