@@ -16,7 +16,6 @@ dotenv.config();
 
 // local
 import Bootstrap from './Bootstrap';
-import 'config/passportConfig';
 import Logger from 'logger';
 import database from 'database';
 import config from 'config/appConfig';
