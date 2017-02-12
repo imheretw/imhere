@@ -15,16 +15,17 @@ import kue from 'kue';
 dotenv.config();
 
 // local
+import Bootstrap from './Bootstrap';
 import 'config/passportConfig';
 import Logger from 'logger';
 import database from 'database';
 import config from 'config/appConfig';
-import JobHandler from 'app/boots/JobHandler';
 
 export default class Sever {
   constructor({ rootPath, appPath }) {
     this._rootPath = rootPath;
     this._appPath = appPath || `${rootPath}/app`;
+    this._bootsPath = `${this._appPath}/boots`;
     this._controllerPath = `${this._appPath}/controllers`;
   }
 
@@ -35,8 +36,9 @@ export default class Sever {
     // create app
     const app = express();
 
-    // start background jobs handler
-    new JobHandler().start();
+    // bootstrap
+    // run handlers in app/boots
+    new Bootstrap({ bootsPath: this._bootsPath }).start();
 
     // use pug and set views and static directories
     app.set('view engine', 'pug');
