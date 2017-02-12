@@ -16,15 +16,16 @@ dotenv.config();
 
 // local
 import 'config/passportConfig';
-import controllers from 'app/controllers';
 import Logger from 'logger';
 import database from 'database';
 import config from 'config/appConfig';
 import JobHandler from 'app/boots/JobHandler';
 
 export default class Sever {
-  constructor(options) {
-    this._rootPath = options.rootPath;
+  constructor({ rootPath, appPath }) {
+    this._rootPath = rootPath;
+    this._appPath = appPath || `${rootPath}/app`;
+    this._controllerPath = `${this._appPath}/controllers`;
   }
 
   start() {
@@ -39,7 +40,7 @@ export default class Sever {
 
     // use pug and set views and static directories
     app.set('view engine', 'pug');
-    app.set('views', path.join(this._rootPath, 'app/views'));
+    app.set('views', path.join(this._appPath, 'views'));
     app.use(express.static(path.join(this._rootPath, 'static')));
 
     //add middlewares
@@ -68,7 +69,7 @@ export default class Sever {
     app.use(passport.session());
 
     // set all controllers
-    app.use('/', controllers);
+    app.use('/', require(this._controllerPath).default);
 
     // catch 404 and forward to error handler
     app.use((req, res, next) => {
