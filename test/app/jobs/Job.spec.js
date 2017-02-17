@@ -20,7 +20,6 @@ describe('Test Job', () => {
 
   describe('constructor', () => {
     it('should create a queue', async() => {
-      expect(job).to.have.property('QUEUE_NAME');
       expect(job).to.have.property('CUNCURRENCY');
       expect(job).to.have.property('ATTEMPTS');
       expect(job).to.have.property('PRIORITY');
@@ -29,29 +28,48 @@ describe('Test Job', () => {
     });
   });
 
-  describe('when calling init', () => {
-    it('should call queue.process', async() => {
-      const spy = sandbox.spy(job.queue, 'process');
-      job.init();
-
-      expect(spy.calledOnce).be.true;
-    });
-  });
-
-  describe('when calling register', () => {
+  describe('when calling _addJobToQueue', () => {
     it('should call queue.create', async() => {
       const stub = sandbox.stub(job.queue, 'create').returns({
         save: () => {},
       });
-      job.register();
+      job._addJobToQueue();
 
-      expect(stub.calledOnce).be.true;
+      expect(stub.calledWith(job.constructor.name)).be.true;
     });
   });
 
   describe('when calling run', () => {
     it('should throw error', async() => {
       expect(job.run).be.throw(Error);
+    });
+  });
+
+  describe('when calling runImmediate', () => {
+    it('should call run', async() => {
+      const stub = sandbox.stub(job, 'run');
+      job.runImmediate();
+
+      expect(stub.calledOnce).be.true;
+    });
+  });
+
+  describe('when calling runLater', () => {
+    it('should call _addJobToQueue with delay', async() => {
+      const stub = sandbox.stub(job, '_addJobToQueue');
+      const delay = 1000;
+      job.runLater(delay);
+
+      expect(stub.calledWith(delay)).be.true;
+    });
+  });
+
+  describe('when calling runUntil', () => {
+    it('should call runLater', async() => {
+      const stub = sandbox.stub(job, 'runLater');
+      job.runUntil();
+
+      expect(stub.calledOnce).be.true;
     });
   });
 
