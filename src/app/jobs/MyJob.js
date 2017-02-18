@@ -1,4 +1,4 @@
-import Job from './Job';
+import { Job } from 'imhere';
 
 export default class MyJob extends Job {
   async run(job) {

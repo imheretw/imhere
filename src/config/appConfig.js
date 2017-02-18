@@ -1,5 +1,7 @@
 'use strict';
 
+import kueConfig from './kueConfig';
+
 export default {
   // environment
   env: process.env.NODE_ENV,
@@ -12,4 +14,6 @@ export default {
     jwt: process.env.JWT_SECRET,
     bcryptSalt: process.env.BCRYPT_SALT,
   },
+
+  queueConfig: kueConfig,
 };

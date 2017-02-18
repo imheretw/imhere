@@ -16,16 +16,17 @@ dotenv.config();
 
 // local
 import Bootstrap from './Bootstrap';
+
+// TODO should move local packages out of framework
 import Logger from 'logger';
 import database from 'database';
-import config from 'config/appConfig';
 
 export default class Sever {
-  constructor({ rootPath, appPath }) {
-    this._rootPath = rootPath;
-    this._appPath = appPath || `${rootPath}/app`;
-    this._bootsPath = `${this._appPath}/boots`;
-    this._controllerPath = `${this._appPath}/controllers`;
+  constructor({ rootPath, config }) {
+    this._config = config;
+
+    this._resetPaths(rootPath);
+    this._setGlobalVariables();
   }
 
   start() {
@@ -37,12 +38,12 @@ export default class Sever {
 
     // bootstrap
     // run handlers in app/boots
-    new Bootstrap({ bootsPath: this._bootsPath }).start();
+    new Bootstrap({ bootsPath: this._paths.boots }).start();
 
     // use pug and set views and static directories
     app.set('view engine', 'pug');
-    app.set('views', path.join(this._appPath, 'views'));
-    app.use(express.static(path.join(this._rootPath, 'static')));
+    app.set('views', path.join(this._paths.app, 'views'));
+    app.use(express.static(path.join(this._paths.root, 'static')));
 
     //add middlewares
     app.use(bodyParser.json({
@@ -70,7 +71,7 @@ export default class Sever {
     app.use(passport.session());
 
     // set all controllers
-    app.use('/', require(this._controllerPath).default);
+    app.use('/', require(this._paths.controllers).default);
 
     // catch 404 and forward to error handler
     app.use((req, res, next) => {
@@ -92,7 +93,7 @@ export default class Sever {
         res.render('error', {
           status: sc,
           message: err.message,
-          stack: config.env === 'development' ? err.stack : '',
+          stack: this._config.env === 'development' ? err.stack : '',
         });
       } else {
         res.json({
@@ -102,8 +103,8 @@ export default class Sever {
     });
 
     // START AND STOP
-    this.expressServer = app.listen(config.port, () => {
-      logger.info(`listening on port ${config.port}`);
+    this.expressServer = app.listen(this._config.port, () => {
+      logger.info(`listening on port ${this._config.port}`);
     });
     process.on('SIGINT', () => {
       logger.info('shutting down!');
@@ -117,5 +118,19 @@ export default class Sever {
       logger.error(error.stack);
       process.exit(1);
     });
+  }
+
+  _setGlobalVariables() {
+    global.App = global.App || {};
+
+    global.App.config = this._config;
+  }
+
+  _resetPaths(rootPath) {
+    this._paths = {};
+    this._paths.root = rootPath;
+    this._paths.app = `${rootPath}/app`;
+    this._paths.boots = `${this._paths.app}/boots`;
+    this._paths.controllers = `${this._paths.app}/controllers`;
   }
 }

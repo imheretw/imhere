@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import Job from 'jobs/Job';
+import Job from '../lib/Job';
 
 describe('Test Job', () => {
   let sandbox;

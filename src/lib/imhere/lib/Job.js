@@ -1,8 +1,8 @@
 import kue from 'kue';
 import moment from 'moment';
+import _ from 'lodash';
 
 import Logable from 'Logable';
-import kueConfig from '../../config/kueConfig';
 
 export default class Job extends Logable {
   constructor() {
@@ -14,7 +14,7 @@ export default class Job extends Logable {
     this.PRIORITY = 'medium';
     this.BACKOFF = null;
 
-    this.queue = kue.createQueue(kueConfig);
+    this._createQueue();
   }
 
   run(job, done) {
@@ -48,6 +48,12 @@ export default class Job extends Logable {
 
       this.logger.info('[ Kue is shut down. ]');
     });
+  }
+
+  _createQueue() {
+    const queueConfig = _.get(global, 'App.config.queueConfig');
+
+    this.queue = kue.createQueue(queueConfig);
   }
 
   _prepareJobData() {
