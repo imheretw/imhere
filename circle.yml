@@ -1,26 +1,45 @@
-machine:
-  timezone:
-    America/Los_Angeles # Set the timezone
-  pre:
-    - mkdir ~/.yarn-cache
-  node:
-    version: 6.2.2
-  services:
-    - redis
+version: 2
+jobs:
+  build:
+    working_directory: ~/imhere
+    docker:
+      - image: node:6.2.2
+        cmd: ["/bin/bash"]
+      - image: redis:3.0
 
-dependencies:
-  pre:
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
-    - sudo apt install bcrypt
-  cache_directories:
-    - ~/.yarn-cache
-  override:
-    - yarn install
-    - npm rebuild
-    - cp .env.sample .env
-test:
-  override:
-    - yarn test:debug
-general:
-  artifacts:
-    - "coverage"
+    steps:
+      - run:
+          name: Install System Libs
+          command: |
+            apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+            apt -qq update
+            apt install -y -qq git yarn bcrypt
+
+      - checkout
+
+      - restore_cache:
+          key: dependency-cache-yarn
+
+      - run:
+          name: Install Dependencies
+          command: |
+            yarn install
+            cp .env.sample .env
+
+      - save_cache:
+          key: dependency-cache-yarn
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          name: Run Tests
+          command: |
+            yarn test:debug
+
+      - store_artifacts:
+          path: ~/imhere/coverage
+          destination: prefix
+
+      - store_test_results:
+          path: ~/imhere/coverage
