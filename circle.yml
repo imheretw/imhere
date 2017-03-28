@@ -33,6 +33,11 @@ jobs:
             - ~/.cache/yarn
 
       - run:
+          name: Run eslint
+          command: |
+            yarn lint
+
+      - run:
           name: Run Tests
           command: |
             yarn test:debug

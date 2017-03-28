@@ -187,7 +187,10 @@ Kue page: http://localhost:5000/kue
 ![kue](https://cloud.githubusercontent.com/assets/1978357/22617555/34ee1780-eb03-11e6-998d-01557f517763.png)
 
 # Available Commands
-* **`yarn start`** starting web server on local machine.
+* bootstrap
+  * **`yarn start`** starting web server on local machine.
+* lint
+  * **`yarn lint`** run eslint to check code style
 * testing
   * **`yarn test`** run testcases with sqlite
   * **`yarn test:debug`** run testcase with sqlite and more debug logs

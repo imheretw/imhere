@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "gulp serve",
+    "lint": "eslint .",
     "test:core": "PORT=4000 node_modules/.bin/nyc node_modules/.bin/mocha --compilers js:babel-core/register -r test/init --recursive test -t 10000",
     "test:core:debug": "DEBUG_LEVEL=debug DEBUG=knex:query,knex:bindings,nock.* npm run test:core",
     "test": "NODE_ENV=test DEBUG_LEVEL=fatal npm run test:core",
