@@ -7,7 +7,7 @@ export default class MyJob extends Job {
   }
 
   _log() {
-    this.logger.debug(`run my job`);
+    this.logger.debug('run my job');
   }
 
   // addtional required arguments for job handler

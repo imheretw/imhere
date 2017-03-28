@@ -1,5 +1,3 @@
-'use strict';
-
 // this controller is meant to set up routes from all other controllers
 // it also sets up basic express routes
 

@@ -1,8 +1,9 @@
-import users from '../data/users';
 import _ from 'lodash';
 
-exports.seed = function(knex, Promise) {
-  var usersPromise = users.map((user) => {
+import users from '../data/users';
+
+exports.seed = (knex, Promise) => {
+  const usersPromise = users.map((user) => {
     user = Object.assign(user, {
       created_at: new Date(),
       updated_at: new Date(),

@@ -21,13 +21,13 @@ describe('Test MyJob', () => {
   });
 
   describe('constructor', () => {
-    it('should create a queue', async() => {
+    it('should create a queue', async () => {
       expect(myJob.queue).be.not.undefined;
     });
   });
 
   describe('when calling run', () => {
-    it('should call _log', async() => {
+    it('should call _log', async () => {
       const stub = sandbox.stub(myJob, '_log')
         .returns({
           then: dummy,
@@ -39,7 +39,7 @@ describe('Test MyJob', () => {
   });
 
   describe('when calling _log', () => {
-    it('should calling logger.debug', async() => {
+    it('should calling logger.debug', async () => {
       const stub = sandbox.stub(myJob.logger, 'debug')
         .returns({
           then: dummy,

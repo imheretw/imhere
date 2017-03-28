@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:mocha/recommended", "airbnb"],
   "env": {
     "browser": true,
     "es6": true,
@@ -14,8 +14,10 @@
   },
   "rules": {
     "arrow-body-style": [2, "as-needed"],
+    "class-methods-use-this": "off",
     "eqeqeq": 2,
     "no-console": 1,
+    "no-param-reassign": "off",
     "no-undef-init": 2,
     "no-undefined": 2,
     "no-unused-vars": [1, {
@@ -24,10 +26,18 @@
     }],
     "no-use-before-define": "off",
     "no-useless-constructor": 2,
+    "no-underscore-dangle": "off",
     "semi": [2, "always"],
-    "comma-dangle": [1, "always-multiline"]
+    "comma-dangle": [1, "always-multiline"],
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
+
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
   },
   "globals": {
     "logger": true
-  }
+  },
+  "plugins": ["chai-expect", "chai-friendly", "mocha"]
 }

@@ -1,4 +1,3 @@
-'use strict';
 
 // built-in
 import path from 'path';
@@ -14,15 +13,16 @@ import params from 'strong-params';
 import dotenv from 'dotenv';
 import kue from 'kue';
 
-dotenv.config();
+import './config/passportConfig';
 
 // local
-import './config/passportConfig';
 import controllers from './app/controllers';
 import Logger from './lib/logger';
 import database from './database';
 import config from './config/appConfig';
 import JobHandler from './app/boots/JobHandler';
+
+dotenv.config();
 
 const logger = Logger('App');
 
@@ -41,7 +41,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(rootPath, 'app/views'));
 app.use(express.static(path.join(rootPath, 'static')));
 
-//add middlewares
+// add middlewares
 app.use(bodyParser.json({
   verify(req, res, buf) {
     req.rawBody = buf;

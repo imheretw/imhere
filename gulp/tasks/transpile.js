@@ -7,7 +7,7 @@ const $ = plugins({
 });
 
 // create transpile tasks for server scripts
-for (const task of TRANSPILE) {
+TRANSPILE.forEach((task) => {
   gulp.task(`transpile:${task}`, [`lint:${task}`], () =>
     gulp.src(PATHS[task].src)
       .pipe($.changed(PATHS[task].dest))
@@ -25,7 +25,7 @@ for (const task of TRANSPILE) {
       .pipe(gulp.dest(PATHS[task].dest))
       .pipe($.print(fp => `transpiled: ${fp}`))
   );
-}
+});
 
 // transpile everything!
 gulp.task('transpile', [...TRANSPILE].map(el => `transpile:${el}`));

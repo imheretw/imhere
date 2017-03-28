@@ -1,9 +1,9 @@
 import Bookshelf from 'bookshelf';
-
-import dbConfig from '../knexfile';
 import modelBase from 'bookshelf-modelbase';
 import Schema from 'bookshelf-schema';
 import knex from 'knex';
+
+import dbConfig from '../knexfile';
 
 const environment = process.env.NODE_ENV || 'development';
 const config = dbConfig[environment];

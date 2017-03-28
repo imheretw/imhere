@@ -4,4 +4,8 @@ import Logger from 'logger';
 
 const logger = Logger('httpMock');
 
-export const githubHttpMock = nock(GITHUB_API_BASE_URL).log(logger.debug);
+const githubHttpMock = nock(GITHUB_API_BASE_URL).log(logger.debug);
+
+export default {
+  githubHttpMock,
+};

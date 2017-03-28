@@ -44,7 +44,7 @@ gulp.task('styles', () =>
       extension: '.css',
     }))
     .pipe($.plumber({
-      errorHandler: function (err) {
+      errorHandler: function errorHandler(err) {
         $.util.log(err);
         this.emit('end');
       },
@@ -89,7 +89,7 @@ gulp.task('files', () =>
 );
 
 // generate webfonts and css from ttf fonts
-gulp.task('fonts', done => {
+gulp.task('fonts', (done) => {
   // eot
   gulp.src(PATHS.fonts.src)
     .pipe($.changed(PATHS.fonts.dest))
@@ -114,8 +114,8 @@ gulp.task('fonts', done => {
   // css
   gulp.src(PATHS.fonts.src)
     .pipe($.changed(PATHS.fonts.dest))
-    .pipe($.tap(file => {
-      mkdirp(PATHS.fonts.dest, err => {
+    .pipe($.tap((file) => {
+      mkdirp(PATHS.fonts.dest, (err) => {
         if (err) $.util.log(err);
         const fname = path.basename(file.path, '.ttf');
         const fp = path.join(PATHS.fonts.dest, `${fname}.css`);

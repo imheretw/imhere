@@ -1,5 +1,3 @@
-'use strict';
-
 import winston from 'winston';
 
 export default function Logger(prefix) {
@@ -25,7 +23,7 @@ export default function Logger(prefix) {
 
   return levels.reduce((acc, level) => {
     // add prefix
-    acc[level] = (...args) => logger[level].apply(logger, formatLog(prefix, args));
+    acc[level] = (...args) => logger[level](...formatLog(prefix, args));
 
     return acc;
   }, {});

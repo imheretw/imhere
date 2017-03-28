@@ -15,7 +15,7 @@ const lintTask = src =>
       .pipe($.eslint.failAfterError());
 
 // create lint tasks for client and server scripts
-for (const task of LINT) gulp.task(`lint:${task}`, lintTask(PATHS[task].src));
+LINT.forEach(task => gulp.task(`lint:${task}`, lintTask(PATHS[task].src)));
 
 // lint this gulpfile
 gulp.task('lint:gulpfile', lintTask('gulpfile.babel.js'));

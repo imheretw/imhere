@@ -19,7 +19,7 @@ describe('Test Job', () => {
   });
 
   describe('constructor', () => {
-    it('should create a queue', async() => {
+    it('should create a queue', async () => {
       expect(job).to.have.property('CUNCURRENCY');
       expect(job).to.have.property('ATTEMPTS');
       expect(job).to.have.property('PRIORITY');
@@ -29,7 +29,7 @@ describe('Test Job', () => {
   });
 
   describe('when calling _addJobToQueue', () => {
-    it('should call queue.create', async() => {
+    it('should call queue.create', async () => {
       const stub = sandbox.stub(job.queue, 'create').returns({
         save: () => {},
       });
@@ -40,13 +40,13 @@ describe('Test Job', () => {
   });
 
   describe('when calling run', () => {
-    it('should throw error', async() => {
+    it('should throw error', async () => {
       expect(job.run).be.throw(Error);
     });
   });
 
   describe('when calling runImmediate', () => {
-    it('should call run', async() => {
+    it('should call run', async () => {
       const stub = sandbox.stub(job, 'run');
       job.runImmediate();
 
@@ -55,7 +55,7 @@ describe('Test Job', () => {
   });
 
   describe('when calling runLater', () => {
-    it('should call _addJobToQueue with delay', async() => {
+    it('should call _addJobToQueue with delay', async () => {
       const stub = sandbox.stub(job, '_addJobToQueue');
       const delay = 1000;
       job.runLater(delay);
@@ -65,7 +65,7 @@ describe('Test Job', () => {
   });
 
   describe('when calling runUntil', () => {
-    it('should call runLater', async() => {
+    it('should call runLater', async () => {
       const stub = sandbox.stub(job, 'runLater');
       job.runUntil();
 
@@ -74,7 +74,7 @@ describe('Test Job', () => {
   });
 
   describe('when calling shutdown', () => {
-    it('should call queue.shutdown', async() => {
+    it('should call queue.shutdown', async () => {
       const stub = sandbox.stub(job.queue, 'shutdown');
       job.shutdown();
 

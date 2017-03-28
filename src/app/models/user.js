@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
-import { ModelBase } from '../../database';
-import config from 'config/appConfig';
+
 import Logger from 'logger';
+import config from 'config/appConfig';
+import { ModelBase } from '../../database';
 
 export const TYPE_DEMO_USER = 'DemoUser';
 export const TYPE_LIMITED_ACCESS_USER = 'LimitedAccessUser';
@@ -14,7 +15,7 @@ const User = ModelBase.extend({
   hasTimestamps: true,
 
   validatePassword(candidatePassword, cb) {
-    let cryptedPassword = bcrypt.hashSync(candidatePassword, config.auth.bcryptSalt);
+    const cryptedPassword = bcrypt.hashSync(candidatePassword, config.auth.bcryptSalt);
     if (cryptedPassword === this.get('encrypted_password')) {
       cb(null, true);
     } else {
@@ -23,7 +24,7 @@ const User = ModelBase.extend({
   },
 });
 
-User.findOrCreate = async function (attributes, transacting) {
+User.findOrCreate = function findOrCreate(attributes, transacting) {
   return User
         .findOne({ email: attributes.email }, { transacting })
         .then((user) => {

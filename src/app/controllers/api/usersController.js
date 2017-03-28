@@ -45,7 +45,7 @@ router.post('/', wrap(async (req, res, next) => {
 
     res.status(201).json({ user: userJSON, token });
   } catch (error) {
-    logger.error(`create user error`, error);
+    logger.error('create user error', error);
     res.status(error.statusCode || 500).json({ error: error.message });
   }
 }));

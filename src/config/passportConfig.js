@@ -1,4 +1,3 @@
-
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
@@ -21,25 +20,28 @@ passport.deserializeUser((id, done) => {
  */
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   const ERROR_MSG = 'Account or password error.';
-  const errorCallback = (done) => done(null, false, { msg: ERROR_MSG });
+  const errorCallback = cb => cb(null, false, { msg: ERROR_MSG });
   const user = await User.forge({ email: email.toLowerCase() }).fetch();
 
   if (!user) {
-    return errorCallback(done);
+    errorCallback(done);
+    return;
   }
 
   // Validate user password
   user.validatePassword(password, (err, isValid) => {
     if (err) {
-      return errorCallback(done);
+      errorCallback(done);
+      return;
     }
 
     // If the password was not valid
     if (!isValid) {
-      return errorCallback(done);
+      errorCallback(done);
+      return;
     }
 
-    return done(null, user.toJSON());
+    done(null, user.toJSON());
   });
 }));
 

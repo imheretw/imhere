@@ -1,18 +1,18 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import { GITHUB_API_ENDPOINTS } from 'services/GithubService';
-import { githubHttpMock } from 'helpers/httpMocks';
+import httpMocks from 'helpers/httpMocks';
 import githubClosedIssueData from 'data/api/github/issues/closed.json';
 import server from 'app';
 
 chai.use(chaiHttp);
 
-describe('Test github controller', function () {
+describe('Test github controller', () => {
   describe('GET /api/github/closed_issues', () => {
     it('should return closed issues', async () => {
       const [owner, repo] = ['imheretw', 'imhere'];
 
-      githubHttpMock
+      httpMocks.githubHttpMock
         .get(GITHUB_API_ENDPOINTS.closedIssues(owner, repo))
         .reply(200, githubClosedIssueData);
 

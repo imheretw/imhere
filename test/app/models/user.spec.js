@@ -3,12 +3,12 @@ import { expect } from 'chai';
 import User from 'models/user';
 import config from 'config/appConfig';
 
-describe('Test User Model', function () {
+describe('Test User Model', () => {
   describe('validatePassword', () => {
     let user;
 
     before(() => {
-      let cryptedPassword = bcrypt.hashSync('123', config.auth.bcryptSalt);
+      const cryptedPassword = bcrypt.hashSync('123', config.auth.bcryptSalt);
       user = new User({
         encrypted_password: cryptedPassword,
       });

@@ -1,8 +1,8 @@
 const knexCleaner = require('knex-cleaner');
 
-exports.seed = function (knex, Promise) {
+exports.seed = (knex, Promise) => {
   // Deletes ALL existing entries
-  var options = {
+  const options = {
     mode: 'truncate', // Valid options 'truncate', 'delete'
     ignoreTables: ['knex_migrations', 'knex_migrations_lock'],
   };

@@ -1,14 +1,17 @@
+/* eslint-disable no-console */
+
 require('babel-register');
 require('dotenv').config();
 
-var dbConfig = require('../knexfile');
-var environment = process.env.NODE_ENV || 'development';
-var config = dbConfig[environment];
+const dbConfig = require('../knexfile');
 
-var database = config.connection.database;
+const environment = process.env.NODE_ENV || 'development';
+const config = dbConfig[environment];
+
+const database = config.connection.database;
 config.connection.database = null;
 
-var knex = require('knex')(config);
+const knex = require('knex')(config);
 // connect without database selected
 
 knex.raw(`DROP DATABASE ${database}`)

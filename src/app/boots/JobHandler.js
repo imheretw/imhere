@@ -7,7 +7,7 @@ export default class JobHandler extends Logable {
   constructor() {
     super();
 
-    this.jobs = Jobs.map((Job) => new Job());
+    this.jobs = Jobs.map(Job => new Job());
     this.queue = kue.createQueue(kueConfig);
 
     this.logger.info(`${this.constructor.name} created`);

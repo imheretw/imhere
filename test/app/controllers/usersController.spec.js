@@ -7,8 +7,7 @@ import { bookshelf } from 'database';
 
 chai.use(chaiHttp);
 
-describe('Test users controller', function () {
-
+describe('Test users controller', () => {
   before(async () => {
     await bookshelf.knex.migrate.latest();
   });
@@ -41,7 +40,7 @@ describe('Test users controller', function () {
 
   describe('POST /api/users', () => {
     it('should create a user', async () => {
-      let res = await chai.request(server)
+      const res = await chai.request(server)
         .post('/api/users')
         .send({
           email: 'user4@test.com',
@@ -71,7 +70,7 @@ describe('Test users controller', function () {
 
   describe('POST /api/users/login', () => {
     it('should login successfully', async () => {
-      let res = await chai.request(server)
+      const res = await chai.request(server)
         .post('/api/users/login')
         .send({
           email: 'user1@test.com',

@@ -3,9 +3,7 @@ import del from 'del';
 import { PATHS, DEST, ALL } from '../config';
 
 // create clean tasks
-for (const task of ALL) {
-  gulp.task(`clean:${task}`, () => del([PATHS[task].dest]));
-}
+ALL.forEach(task => gulp.task(`clean:${task}`, () => del([PATHS[task].dest])));
 
 // clean everything!
 gulp.task('clean', () => del([DEST]));
