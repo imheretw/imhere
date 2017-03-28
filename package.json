@@ -20,12 +20,10 @@
     "db:rollback": "knex migrate:rollback",
     "db:seed": "knex seed:run",
     "command:job:my": "./src/commands/job my",
-    "eslint-pre-commit": "./scripts/eslint-pre-commit.sh",
-    "jscs-pre-commit": "./scripts/jscs-pre-commit.sh"
+    "eslint-pre-commit": "./scripts/eslint-pre-commit.sh"
   },
   "pre-commit": [
-    "eslint-pre-commit",
-    "jscs-pre-commit"
+    "eslint-pre-commit"
   ],
   "dependencies": {
     "async": "^2.1.2",
@@ -116,7 +114,6 @@
     "gulp-ttf2woff2": "^2.0.2",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "jscs": "^3.0.7",
     "main-bower-files": "^2.13.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
@@ -140,6 +137,5 @@
       "html"
     ]
   },
-  "eslint-pre-commit": "./scripts/eslint-pre-commit.sh",
-  "jscs-pre-commit": "./scripts/jscs-pre-commit.sh"
+  "eslint-pre-commit": "./scripts/eslint-pre-commit.sh"
 }

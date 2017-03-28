@@ -5,7 +5,7 @@ Node.js web developer is now easily to start developing web application in minut
 
 # Integrated Features
 
-* ES Lint & JSCS for code style checking
+* ES Lint with Airbnb code style checking
 * Support ES7 async/await (babel)
 * MVC architecture
   * router (express.js)
