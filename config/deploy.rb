@@ -1,11 +1,11 @@
 # config/deploy.rb
 
-lock '3.6.0'
+lock '3.8.0'
 
 # application settings
-set :application, 'imhere'
-set :repo_url, "git@github.com:imheretw/imhere.git"
-set :deploy_to, '/opt/www/imhere'
+set :application, ENV['APPLICATION']
+set :repo_url, ENV['REPO']
+set :deploy_to, ENV['DEPLOY_TO']
 set :scm, :git
 
 # others settings
@@ -18,7 +18,7 @@ set :linked_files, %w(.env)
 
 # nvm settings
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, 'v6.2.2'
+set :nvm_node, 'v6.10.1'
 set :nvm_map_bins, %w{node npm gulp bower pm2 knex}
 set :nvm_node_path, -> {
   if fetch(:nvm_type, :user) == :system
@@ -30,6 +30,9 @@ set :nvm_node_path, -> {
 
 # npm settings
 set :npm_flags, '--silent --no-progress'
+
+# bower settings
+set :bower_flags, '--quiet --config.interactive=false --allow-root'
 
 # gulp tasks
 set :gulp_tasks, 'build'

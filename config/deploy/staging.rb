@@ -1,15 +1,16 @@
 set :branch, ENV["CI_BRANCH"]
-set :user, :ubuntu
+set :user, ENV["STAGING_USER"]
 
-role :app, %w{staging.test.com}
-role :web, %w{staging.test.com}
-role :db,  %w{staging.test.com}
+role :app, ENV['STAGING_HOST']
+role :web, ENV['STAGING_HOST']
+
+set :deploy_to, ENV['STAGING_DEPLOY_TO']
 
 set :ssh_options, {
   user: fetch(:user),
   auth_methods: %w(publickey),
   keys: [
     File.join(ENV['HOME'], '.ssh', 'id_rsa'),
-    File.join(ENV['HOME'], '.ssh', 'staging.pem')
+    File.join(ENV['HOME'], '.ssh', ENV['STAGING_PEM'])
   ],
 }
