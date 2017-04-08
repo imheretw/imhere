@@ -17,10 +17,10 @@ GEM
       capistrano (~> 3.0)
     capistrano-locally (0.2.4)
       capistrano (~> 3.0)
-    capistrano-npm (1.0.2)
-      capistrano (>= 3.0.0)
     capistrano-nvm (0.0.6)
       capistrano (~> 3.1)
+    capistrano-yarn (2.0.2)
+      capistrano (~> 3.0)
     capistrano_pm2 (0.0.4)
       capistrano (~> 3.0, >= 3.0.0)
     dotenv (2.2.0)
@@ -42,8 +42,8 @@ DEPENDENCIES
   capistrano-env-config
   capistrano-gulp
   capistrano-locally
-  capistrano-npm
   capistrano-nvm
+  capistrano-yarn
   capistrano_pm2
 
 BUNDLED WITH

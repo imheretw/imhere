@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem 'capistrano', '3.8.0'
-gem 'capistrano-npm'
+gem 'capistrano-yarn'
 gem 'capistrano-nvm'
 gem 'capistrano-bower'
 gem 'capistrano-gulp'
