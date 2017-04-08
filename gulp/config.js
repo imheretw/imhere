@@ -36,6 +36,10 @@ export const PATHS = {
     src: path.join(SRC, 'app.js'),
     dest: DEST,
   },
+  routes: {
+    src: path.join(SRC, 'app/routes.js'),
+    dest: path.join(DEST, 'app'),
+  },
   boots: {
     src: path.join(SRC, 'app/boots/**/*.js'),
     dest: path.join(DEST, 'app/boots'),

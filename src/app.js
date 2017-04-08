@@ -16,11 +16,11 @@ import kue from 'kue';
 import './config/passportConfig';
 
 // local
-import controllers from './app/controllers';
 import Logger from './lib/logger';
 import database from './database';
 import config from './config/appConfig';
 import JobHandler from './app/boots/JobHandler';
+import routes from './app/routes';
 
 dotenv.config();
 
@@ -67,7 +67,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // set all controllers
-app.use('/', controllers);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
