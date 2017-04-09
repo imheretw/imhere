@@ -1,8 +1,12 @@
-import GithubController from 'controllers/api/GithubController';
-import UsersController from 'controllers/api/UsersController';
 import { Router } from 'express';
 
+import GithubController from 'controllers/api/GithubController';
+import UsersController from 'controllers/api/UsersController';
+
+import Logger from 'logger';
+
 const router = new Router({ mergeParams: true });
+const logger = Logger('UserController');
 
 export default router;
 
@@ -12,9 +16,24 @@ function route(method, path, controller, actionName) {
   func.call(router, path, middlewares || [], action);
 }
 
-route('get', '/api/users', UsersController, 'index');
-route('post', '/api/users', UsersController, 'store');
+function resource(path, controller) {
+  const settings = [
+    { method: 'get', action: 'index', url: '/' },
+    { method: 'get', action: 'show', url: '/:id' },
+    { method: 'post', action: 'store', url: '/' },
+    { method: 'delete', action: 'delete', url: '/' },
+    { method: 'put', action: 'update', url: '/update' },
+    { method: 'patch', action: 'update', url: '/update' },
+  ];
+
+  settings.forEach((setting) => {
+    logger.debug('register route:', setting.method, `${path}${setting.url}`, controller.name, setting.action);
+    route(setting.method, `${path}${setting.url}`, controller, setting.action);
+  });
+}
+
 route('get', '/api/users/current', UsersController, 'currentUser');
 route('post', '/api/users/login', UsersController, 'login');
+resource('/api/users', UsersController);
 
 route('get', '/api/github/closed_issues', GithubController, 'closedIssues');

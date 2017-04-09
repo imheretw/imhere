@@ -30,6 +30,12 @@ export default class UserController extends BaseController {
     this.res.json({ users, pagination: users.pagination });
   }
 
+  async show() {
+    const user = await User.findOne({ id: this.req.params.id });
+
+    this.res.json({ user });
+  }
+
   async store() {
     try {
       const attributes = {
