@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import ApplicationController from 'controllers/ApplicationController';
 import GithubController from 'controllers/api/GithubController';
 import UsersController from 'controllers/api/UsersController';
 
@@ -32,9 +33,7 @@ function resource(path, controller) {
   });
 }
 
-router.get('/', (req, res, next) => res.render('index', {
-  title: 'imhere',
-}));
+route('get', '/', ApplicationController, 'index');
 
 route('get', '/api/users/current', UsersController, 'currentUser');
 route('post', '/api/users/login', UsersController, 'login');
