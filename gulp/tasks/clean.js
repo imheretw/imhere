@@ -1,9 +1,9 @@
 import gulp from 'gulp';
 import del from 'del';
-import { PATHS, DEST, ALL } from '../config';
+import { DEST, ALL } from '../config';
 
 // create clean tasks
-ALL.forEach(task => gulp.task(`clean:${task}`, () => del([PATHS[task].dest])));
+ALL.forEach(task => gulp.task(`clean:${task.name}`, () => del([task.dest])));
 
 // clean everything!
 gulp.task('clean', () => del([DEST]));

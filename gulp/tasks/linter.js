@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import plugins from 'gulp-load-plugins';
-import { PATHS, LINT } from '../config';
+import { LINT } from '../config';
 
 const $ = plugins({
   pattern: ['gulp-*', 'main-bower-files'],
@@ -15,7 +15,7 @@ const lintTask = src =>
       .pipe($.eslint.failAfterError());
 
 // create lint tasks for client and server scripts
-LINT.forEach(task => gulp.task(`lint:${task}`, lintTask(PATHS[task].src)));
+LINT.forEach(task => gulp.task(`lint:${task.name}`, lintTask(task.src)));
 
 // lint this gulpfile
 gulp.task('lint:gulpfile', lintTask('gulpfile.babel.js'));

@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import plugins from 'gulp-load-plugins';
-import { PATHS, TRANSPILE } from '../config';
+import { TRANSPILE } from '../config';
 
 const $ = plugins({
   pattern: ['gulp-*', 'main-bower-files'],
@@ -8,9 +8,9 @@ const $ = plugins({
 
 // create transpile tasks for server scripts
 TRANSPILE.forEach((task) => {
-  gulp.task(`transpile:${task}`, [`lint:${task}`], () =>
-    gulp.src(PATHS[task].src)
-      .pipe($.changed(PATHS[task].dest))
+  gulp.task(`transpile:${task.name}`, [`lint:${task.name}`], () =>
+    gulp.src(task.src)
+      .pipe($.changed(task.dest))
       .pipe($.babel({
         presets: ['es2015', 'es2016', 'es2017'],
         plugins: [
@@ -22,10 +22,10 @@ TRANSPILE.forEach((task) => {
           ],
         ],
       }))
-      .pipe(gulp.dest(PATHS[task].dest))
+      .pipe(gulp.dest(task.dest))
       .pipe($.print(fp => `transpiled: ${fp}`))
   );
 });
 
 // transpile everything!
-gulp.task('transpile', [...TRANSPILE].map(el => `transpile:${el}`));
+gulp.task('transpile', [...TRANSPILE].map(el => `transpile:${el.name}`));

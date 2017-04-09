@@ -1,6 +1,7 @@
 import gulp from 'gulp';
+import _ from 'lodash';
 import plugins from 'gulp-load-plugins';
-import { PATHS } from '../config';
+import { PATHS, CLIENT } from '../config';
 
 const $ = plugins({
   pattern: ['gulp-*', 'main-bower-files'],
@@ -26,8 +27,8 @@ gulp.task('bower:js', () =>
 // move bower css
 gulp.task('bower:css', () =>
   gulp.src($.mainBowerFiles())
-    .pipe($.changed(PATHS.styles.dest))
+    .pipe($.changed(_.find(CLIENT, { name: 'styles' }).dest))
     .pipe($.filter('**/*.css'))
-    .pipe(gulp.dest(PATHS.styles.dest))
+    .pipe(gulp.dest(_.find(CLIENT, { name: 'styles' }).dest))
     .pipe($.print(fp => `bower: ${fp}`))
 );

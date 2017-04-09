@@ -1,17 +1,18 @@
 import gulp from 'gulp';
-import { PATHS, TRANSPILE, ALL } from '../config';
+import { TRANSPILE, CLIENT } from '../config';
 
 gulp.task('watch', ['build'], () => {
-  ALL.forEach((task) => {
-    // tanspile tasks
-    if (TRANSPILE.has(task)) gulp.watch(PATHS[task].src, [`transpile:${task}`]);
+  TRANSPILE.forEach((task) => {
+    gulp.watch(task.src, [`transpile:${task.name}`]);
+  });
 
+  CLIENT.forEach((task) => {
     // add some delay for images
-    else if (task === 'images') {
-      gulp.watch(PATHS.images.src, {
+    if (task.name === 'images') {
+      gulp.watch(task.src, {
         debounceDelay: 2500,
       }, ['images']);
-    } else gulp.watch(PATHS[task].src, [task]);
+    } else gulp.watch(task.src, [task.name]);
   });
 
   // also lint this gulpfile on save
