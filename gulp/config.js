@@ -50,13 +50,18 @@ export const PATHS = {
   transpile: [
     {
       name: 'app:entry',
-      src: path.join(SRC, 'app.js'),
+      src: path.join(SRC, '*.js'),
       dest: DEST,
     },
     {
       name: 'app',
       src: path.join(SRC, 'app/**/*.js'),
       dest: path.join(DEST, 'app'),
+    },
+    {
+      name: 'config',
+      src: path.join(SRC, 'config/**/*.js'),
+      dest: path.join(DEST, 'config'),
     },
     {
       name: 'lib',
