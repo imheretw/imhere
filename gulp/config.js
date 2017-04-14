@@ -9,34 +9,34 @@ export const PATHS = {
   assets: [
     {
       name: 'styles',
-      src: path.join(SRC, 'styles/**/*.scss'),
+      src: path.join(SRC, 'assets/styles/**/*.scss'),
       dest: path.join(DEST, 'static/css'),
     },
     {
       name: 'images',
-      src: path.join(SRC, 'images/**/*'),
+      src: path.join(SRC, 'assets/images/**/*'),
       dest: path.join(DEST, 'static/images'),
     },
     {
       name: 'attachments',
-      src: path.join(SRC, 'static/attachments/**/*'),
+      src: path.join(SRC, 'assets/static/attachments/**/*'),
       dest: path.join(DEST, 'static/attachments'),
     },
     {
       name: 'files',
-      src: path.join(SRC, 'files/**/*'),
+      src: path.join(SRC, 'assets/files/**/*'),
       dest: path.join(DEST, 'static/files'),
     },
     {
       name: 'fonts',
-      src: path.join(SRC, 'fonts/**/*.ttf'),
+      src: path.join(SRC, 'assets/fonts/**/*.ttf'),
       dest: path.join(DEST, 'static/fonts'),
     },
   ],
 
   scripts: {
     name: 'scripts',
-    src: path.join(SRC, 'scripts/**/*.js'),
+    src: path.join(SRC, 'assets/scripts/**/*.js'),
     dest: path.join(DEST, 'static/js'),
   },
 
