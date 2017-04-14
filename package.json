@@ -17,9 +17,9 @@
     "test:mysql:debug": "NODE_ENV=test_mysql npm run test:core:debug",
     "db:create": "node src/database/create.js",
     "db:drop": "node src/database/drop.js",
-    "db:migrate": "knex migrate:latest",
-    "db:rollback": "knex migrate:rollback",
-    "db:seed": "knex seed:run",
+    "db:migrate": "knex migrate:latest --knexfile ./src/config/knexConfig.js --cwd .",
+    "db:rollback": "knex migrate:rollback --knexfile ./src/config/knexConfig.js --cwd .",
+    "db:seed": "knex seed:run --knexfile ./src/config/knexConfig.js --cwd .",
     "command:job:my": "./src/commands/job my",
     "eslint-pre-commit": "./bin/eslint-pre-commit.sh"
   },

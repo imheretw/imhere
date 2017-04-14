@@ -3,7 +3,7 @@ import modelBase from 'bookshelf-modelbase';
 import Schema from 'bookshelf-schema';
 import knex from 'knex';
 
-import dbConfig from '../../knexfile';
+import dbConfig from 'config/knexConfig';
 
 const environment = process.env.NODE_ENV || 'development';
 const config = dbConfig[environment];
