@@ -12,11 +12,13 @@ export const GITHUB_API_ENDPOINTS = {
 export default class GithubService {
   static async getClosedIssues() {
     logger.debug('start getting closed issues');
-    const issues = await github.issues.getForRepo({
+    const response = await github.issues.getForRepo({
       owner: 'imheretw',
       repo: 'imhere',
       state: 'closed',
     });
+
+    const issues = response.data;
 
     logger.debug('issues', JSON.stringify(issues));
 
