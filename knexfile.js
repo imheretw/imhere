@@ -17,10 +17,10 @@ module.exports = {
     },
     debug: false,
     seeds: {
-      directory: './db/seeds/development',
+      directory: './src/db/seeds/development',
     },
     migrations: {
-      directory: './db/migrations',
+      directory: './src//db/migrations',
     },
   },
   test: {
@@ -29,10 +29,10 @@ module.exports = {
     useNullAsDefault: true,
     debug: false,
     seeds: {
-      directory: './db/seeds/test',
+      directory: './src/db/seeds/test',
     },
     migrations: {
-      directory: './db/migrations',
+      directory: './src/db/migrations',
     },
   },
   test_mysql: {
@@ -46,10 +46,10 @@ module.exports = {
     },
     debug: false,
     seeds: {
-      directory: './db/seeds/test',
+      directory: './src/db/seeds/test',
     },
     migrations: {
-      directory: './db/migrations',
+      directory: './src/db/migrations',
     },
   },
 };

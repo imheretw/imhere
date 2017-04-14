@@ -3,7 +3,7 @@
 require('babel-register');
 require('dotenv').config();
 
-const dbConfig = require('../knexfile');
+const dbConfig = require('../../knexfile');
 
 const environment = process.env.NODE_ENV || 'development';
 const config = dbConfig[environment];

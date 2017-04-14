@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import config from '../../../src/config/appConfig';
+import config from 'config/appConfig';
 
 const users = [{
   id: 1,

@@ -5,9 +5,6 @@
       "plugins": [
         ["module-resolver", {
           "root": ["./src/app", "./src/lib", "./src", "./test"],
-          "alias": {
-            "db": "./db",
-          }
         }],
         [
           "transform-runtime", {
