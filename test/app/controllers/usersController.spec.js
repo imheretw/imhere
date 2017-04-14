@@ -2,7 +2,7 @@ import chai, { assert, expect } from 'chai';
 import chaiHttp from 'chai-http';
 import factory from 'factory-girl';
 
-import server from 'app';
+import server from 'server';
 import { bookshelf } from 'database';
 
 chai.use(chaiHttp);

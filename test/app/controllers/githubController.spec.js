@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 import { GITHUB_API_ENDPOINTS } from 'services/GithubService';
 import httpMocks from 'helpers/httpMocks';
 import githubClosedIssueData from 'data/api/github/issues/closed.json';
-import server from 'app';
+import server from 'server';
 
 chai.use(chaiHttp);
 

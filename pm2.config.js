@@ -3,10 +3,10 @@ require('dotenv').config();
 module.exports = {
   apps: [{
     name: process.env.APP_NAME,
-    script: './app.js',
+    script: './server.js',
     cwd: process.env.APP_PATH,
-    error_file: './logs/app.err.log',
-    out_file: './logs/app.out.log',
+    error_file: './logs/server.err.log',
+    out_file: './logs/server.out.log',
     exec_mode: 'fork_mode',
   }],
 };

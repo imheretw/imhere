@@ -2,7 +2,7 @@
   "name": "imhere",
   "version": "0.1.0",
   "description": "A integrated node framework",
-  "main": "app.js",
+  "main": "src/server.js",
   "repository": "git@github.com:imheretw/imhere.git",
   "author": "ImHere <imhere.in.tw@gmail.com>",
   "license": "MIT",

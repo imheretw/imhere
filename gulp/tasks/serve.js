@@ -11,7 +11,7 @@ const $ = plugins({
 gulp.task('serve', ['watch'], () =>
   $.nodemon({
     exec: 'node-inspector & node --debug',
-    script: path.join(DEST, 'app.js'),
+    script: path.join(DEST, 'server.js'),
     watch: path.join(DEST, '**/*.js'),
     ignore: path.join(DEST, 'static'),
   })
