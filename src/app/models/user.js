@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 import Logger from 'logger';
 import config from 'config/appConfig';
-import { ModelBase } from '../../database';
+import { ModelBase } from 'database';
 
 export const TYPE_DEMO_USER = 'DemoUser';
 export const TYPE_LIMITED_ACCESS_USER = 'LimitedAccessUser';

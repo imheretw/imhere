@@ -68,6 +68,11 @@ export const PATHS = {
       src: path.join(SRC, 'lib/**/*.js'),
       dest: path.join(DEST, 'lib'),
     },
+    {
+      name: 'database',
+      src: path.join(SRC, 'database/**/*.js'),
+      dest: path.join(DEST, 'database'),
+    },
   ],
 };
 

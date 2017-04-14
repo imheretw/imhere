@@ -1,4 +1,4 @@
-// Please enable innodb_large_prefix config if your mysql version is under 5.7.7
+// Please enable innodatabase_large_prefix config if your mysql version is under 5.7.7
 // This application required larger mysql index length for store emoji characters.
 
 // Update with your config settings.
@@ -17,10 +17,10 @@ module.exports = {
     },
     debug: false,
     seeds: {
-      directory: './src/db/seeds/development',
+      directory: './src/database/seeds/development',
     },
     migrations: {
-      directory: './src//db/migrations',
+      directory: './src//database/migrations',
     },
   },
   test: {
@@ -29,10 +29,10 @@ module.exports = {
     useNullAsDefault: true,
     debug: false,
     seeds: {
-      directory: './src/db/seeds/test',
+      directory: './src/database/seeds/test',
     },
     migrations: {
-      directory: './src/db/migrations',
+      directory: './src/database/migrations',
     },
   },
   test_mysql: {
@@ -46,10 +46,10 @@ module.exports = {
     },
     debug: false,
     seeds: {
-      directory: './src/db/seeds/test',
+      directory: './src/database/seeds/test',
     },
     migrations: {
-      directory: './src/db/migrations',
+      directory: './src/database/migrations',
     },
   },
 };
