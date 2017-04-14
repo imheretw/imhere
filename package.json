@@ -21,7 +21,7 @@
     "db:rollback": "knex migrate:rollback",
     "db:seed": "knex seed:run",
     "command:job:my": "./src/commands/job my",
-    "eslint-pre-commit": "./scripts/eslint-pre-commit.sh"
+    "eslint-pre-commit": "./bin/eslint-pre-commit.sh"
   },
   "pre-commit": [
     "eslint-pre-commit"
@@ -138,5 +138,5 @@
       "html"
     ]
   },
-  "eslint-pre-commit": "./scripts/eslint-pre-commit.sh"
+  "eslint-pre-commit": "./bin/eslint-pre-commit.sh"
 }
