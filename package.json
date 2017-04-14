@@ -21,7 +21,8 @@
     "db:rollback": "knex migrate:rollback --knexfile ./src/config/knexConfig.js --cwd .",
     "db:seed": "knex seed:run --knexfile ./src/config/knexConfig.js --cwd .",
     "command:job:my": "./src/commands/job my",
-    "eslint-pre-commit": "./bin/eslint-pre-commit.sh"
+    "eslint-pre-commit": "./bin/eslint-pre-commit.sh",
+    "changelog": "./node_modules/.bin/standard-changelog"
   },
   "pre-commit": [
     "eslint-pre-commit"
