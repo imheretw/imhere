@@ -1,8 +1,0 @@
-#!/usr/bin/env babel-node
-
-import moment from 'moment';
-import MyJob from 'jobs/MyJob';
-
-var job = new MyJob();
-job.runImmediate();
-job.shutdown();

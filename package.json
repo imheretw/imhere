@@ -15,14 +15,14 @@
     "test:debug": "NODE_ENV=test npm run test:core:debug",
     "test:mysql": "NODE_ENV=test_mysql npm run test:core",
     "test:mysql:debug": "NODE_ENV=test_mysql npm run test:core:debug",
-    "db:create": "node src/database/create.js",
-    "db:drop": "node src/database/drop.js",
+    "db:create": "babel-node src/database/create.js",
+    "db:drop": "babel-node src/database/drop.js",
     "db:migrate": "knex migrate:latest --knexfile ./src/config/knexConfig.js --cwd .",
     "db:rollback": "knex migrate:rollback --knexfile ./src/config/knexConfig.js --cwd .",
     "db:seed": "knex seed:run --knexfile ./src/config/knexConfig.js --cwd .",
-    "command:job:my": "./src/commands/job my",
+    "command:job:my": "babel-node ./src/commands/job.js my",
     "eslint-pre-commit": "./bin/eslint-pre-commit.sh",
-    "changelog": "./node_modules/.bin/standard-changelog"
+    "changelog": "standard-changelog"
   },
   "pre-commit": [
     "eslint-pre-commit"
@@ -67,6 +67,7 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
     "babel-plugin-module-resolver": "^2.7.0",
@@ -121,6 +122,7 @@
     "pre-commit": "^1.2.2",
     "sinon": "^2.1.0",
     "sqlite3": "^3.1.8",
+    "standard-changelog": "^1.0.1",
     "vinyl-fs": "^2.4.4"
   },
   "nyc": {

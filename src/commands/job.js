@@ -1,5 +1,3 @@
-#!/usr/bin/env babel-node
-
 import dotenv from 'dotenv';
 import program from 'commander';
 
