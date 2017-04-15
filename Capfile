@@ -1,4 +1,9 @@
 # Load DSL and set up stages
+# default deploy_config_path is 'config/deploy.rb'
+set :deploy_config_path, 'tools/capistrano/deploy.rb'
+set :stage_config_path, 'tools/capistrano/stages'
+
+# Load DSL and set up stages
 require 'capistrano/setup'
 
 # Include default deployment tasks
@@ -33,5 +38,9 @@ require 'capistrano/locally'
 # require 'net/ssh/proxy/command' # live deploy use proxy
 # require 'cap-ec2/capistrano'
 
+# default deploy_config_path is 'config/deploy.rb'
+set :deploy_config_path, 'tools/capistrano/deploy.rb'
+set :stage_config_path, 'tools/capistrano/stages'
+
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
-Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
+Dir.glob('tools/capistrano/tasks/*.rb').each { |r| import r }
