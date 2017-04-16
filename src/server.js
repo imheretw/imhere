@@ -16,13 +16,14 @@ config.path = {
   static: path.join(rootPath, 'static'),
 };
 
-const server = new Server({ config, routes });
+const server = new Server({ config });
 
 server
-  .start()
+  .setRoutes(routes)
   .addHandlers([
     new JobHandler(),
     new PassportHandler(),
-  ]);
+  ])
+  .start();
 
 export default server;

@@ -19,13 +19,21 @@ export default class Server {
     this._handlers = [];
     this._config = config;
     this._routes = routes;
+
+    this._initApp();
   }
 
   start() {
     this._logger.debug('Starting Server...');
 
-    this._initApp();
+    this._initRoutes();
     this._initExpressServer();
+
+    return this;
+  }
+
+  setRoutes(routes) {
+    this._routes = routes;
 
     return this;
   }
@@ -37,6 +45,47 @@ export default class Server {
     ];
 
     handlers.forEach(handler => handler.start());
+
+    return this;
+  }
+
+  _initRoutes(routes) {
+    // use kue for background jobs handler
+    // visit http://localhost:5000/kue to see queued background jobs
+    this._app.use('/kue', kue.app);
+
+    if (this._routes) {
+      // routes
+      this._app.use('/', this._routes);
+      // catch 404 and forward to error handler
+      this._app.use((req, res, next) => {
+        const err = new Error('Route Not Found');
+        err.statusCode = 404;
+        next(err);
+      });
+    }
+
+    // general errors
+    this._app.use((err, req, res, next) => {
+      const sc = err.statusCode || 500;
+      res.status(sc);
+
+      this._logger.error(
+        'Error on status', sc, err.stack
+      );
+
+      if (sc === 500) {
+        res.render('error', {
+          status: sc,
+          message: err.message,
+          stack: this._config.env === 'development' ? err.stack : '',
+        });
+      } else {
+        res.json({
+          error: err.message,
+        });
+      }
+    });
 
     return this;
   }
@@ -68,48 +117,13 @@ export default class Server {
     this._app.use(helmet());
     this._app.use(params.expressMiddleware());
 
-    // use kue for background jobs handler
-    // visit http://localhost:5000/kue to see queued background jobs
-    this._app.use('/kue', kue.app);
-
-    // routes
-    this._app.use('/', this._routes);
-
     // passport for authenticate
     this._app.use(passport.initialize());
     this._app.use(passport.session());
-
-    // catch 404 and forward to error handler
-    this._app.use((req, res, next) => {
-      const err = new Error('Route Not Found');
-      err.statusCode = 404;
-      next(err);
-    });
-
-    // general errors
-    this._app.use((err, req, res, next) => {
-      const sc = err.statusCode || 500;
-      res.status(sc);
-
-      this._logger.error(
-        'Error on status', sc, err.stack
-      );
-
-      if (sc === 500) {
-        res.render('error', {
-          status: sc,
-          message: err.message,
-          stack: this._config.env === 'development' ? err.stack : '',
-        });
-      } else {
-        res.json({
-          error: err.message,
-        });
-      }
-    });
   }
 
   _initExpressServer() {
+    this.setRoutes();
     // START AND STOP
     this._expressServer = this._app.listen(this._config.port, () => {
       this._logger.info(`Started server and listening on port ${this._config.port}`);
