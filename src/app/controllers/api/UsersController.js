@@ -6,9 +6,9 @@ import BaseController from 'controllers/BaseController';
 import User from 'models/user';
 import jwtMiddleware from 'middlewares/jwtMiddleware';
 import config from 'config/appConfig';
-import Logger from 'logger';
+import Logger from 'Logger';
 
-const logger = Logger('UserController');
+const logger = new Logger('UserController');
 const expiresIn = 60 * 60 * 24 * 30;
 
 export default class UserController extends BaseController {

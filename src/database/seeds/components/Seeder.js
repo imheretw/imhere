@@ -1,10 +1,10 @@
 import { bookshelf } from 'database';
-import Logger from 'logger';
+import Logger from 'Logger';
 
 export default class Seeder {
   constructor() {
     this.knex = bookshelf.knex;
-    this.logger = Logger(this.constructor.name);
+    this.logger = new Logger(this.constructor.name);
   }
 
   async run() {

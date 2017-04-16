@@ -1,7 +1,7 @@
-import Logger from 'logger';
+import Logger from 'Logger';
 
 export default class Logable {
   constructor() {
-    this.logger = Logger(this.constructor.name);
+    this.logger = new Logger(this.constructor.name);
   }
 }

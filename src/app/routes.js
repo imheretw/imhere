@@ -4,10 +4,10 @@ import ApplicationController from 'controllers/ApplicationController';
 import GithubController from 'controllers/api/GithubController';
 import UsersController from 'controllers/api/UsersController';
 
-import Logger from 'logger';
+import Logger from 'Logger';
 
 const router = new Router({ mergeParams: true });
-const logger = Logger('UserController');
+const logger = new Logger('UserController');
 
 export default router;
 

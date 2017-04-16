@@ -1,9 +1,9 @@
-import Logger from 'logger';
+import Logger from 'Logger';
 
 export default class SeedRunner {
   addSeeds(ComponentClasses) {
     this.ComponentClasses = ComponentClasses;
-    this.logger = Logger('SeedRunner');
+    this.logger = new Logger('SeedRunner');
   }
 
   async run() {

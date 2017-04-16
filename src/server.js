@@ -24,7 +24,7 @@ import routes from './app/routes';
 
 dotenv.config();
 
-const logger = Logger('App');
+const logger = new Logger('App');
 
 // EXPRESS SET-UP
 // create app
