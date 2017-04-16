@@ -1,5 +1,7 @@
 import path from 'path';
 import dotenv from 'dotenv';
+import kue from 'kue';
+
 import { Server } from 'gocool';
 
 import JobHandler from 'app/boots/JobHandler';
@@ -28,6 +30,9 @@ server
     new PassportHandler(),
   ])
   .addPlugin('/github-demo', GithubDemoPlugin)
+  .addExpressPlugins([
+    { path: '/kue', content: kue.app },
+  ])
   .start();
 
 export default server;

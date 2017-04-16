@@ -6,7 +6,6 @@ import express from 'express';
 import helmet from 'helmet';
 import passport from 'passport';
 import params from 'strong-params';
-import kue from 'kue';
 
 // lib
 import Logger from 'Logger';
@@ -17,6 +16,7 @@ export default class Server {
     this._app = null;
     this._expressServer = null;
     this._views = [];
+    this._expressPlugins = [];
     this._handlers = [];
     this._config = config;
 
@@ -28,6 +28,7 @@ export default class Server {
   start() {
     this._logger.debug('Starting Server...');
 
+    this._initExpressPlugins();
     this._initRoutes();
     this._initViews();
     this._initExpressServer();
@@ -57,6 +58,17 @@ export default class Server {
       this._views = [
         ...this._views,
         ...views,
+      ];
+    }
+
+    return this;
+  }
+
+  addExpressPlugins(expressPlugins) {
+    if (expressPlugins && expressPlugins.length) {
+      this._expressPlugins = [
+        ...this._expressPlugins,
+        ...expressPlugins,
       ];
     }
 
@@ -109,10 +121,6 @@ export default class Server {
   }
 
   _initRoutes() {
-    // use kue for background jobs handler
-    // visit http://localhost:5000/kue to see queued background jobs
-    this._app.use('/kue', kue.app);
-
     if (this._routes) {
       // routes
       this._app.use('/', this._routes);
@@ -151,6 +159,16 @@ export default class Server {
 
   _initViews() {
     this._app.set('views', this._views);
+  }
+
+  _initExpressPlugins() {
+    this._expressPlugins.forEach((plugin) => {
+      if (plugin.path) {
+        this._app.use(plugin.path, plugin.content);
+      } else {
+        this._app.use(plugin.content);
+      }
+    });
   }
 
   _initExpressServer() {
