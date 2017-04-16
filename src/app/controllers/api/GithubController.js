@@ -1,4 +1,4 @@
-import { Controller } from 'framework';
+import { Controller } from 'gocool';
 import GithubService from 'services/GithubService';
 
 export default class GithubController extends Controller {

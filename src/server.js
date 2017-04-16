@@ -1,6 +1,6 @@
 import path from 'path';
 import dotenv from 'dotenv';
-import { Server } from 'framework';
+import { Server } from 'gocool';
 import JobHandler from 'app/boots/JobHandler';
 import PassportHandler from 'app/boots/PassportHandler';
 import config from 'config/appConfig';

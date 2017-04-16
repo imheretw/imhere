@@ -1,4 +1,4 @@
-import { Router } from 'framework';
+import { Router } from 'gocool';
 
 import ApplicationController from 'controllers/ApplicationController';
 import GithubController from 'controllers/api/GithubController';

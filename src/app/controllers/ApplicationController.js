@@ -1,4 +1,4 @@
-import { Controller } from 'framework';
+import { Controller } from 'gocool';
 
 export default class ApplicationController extends Controller {
   async index() {

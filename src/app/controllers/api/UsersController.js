@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import bcrypt from 'bcrypt';
 
-import { Controller } from 'framework';
+import { Controller } from 'gocool';
 import User from 'models/user';
 import jwtMiddleware from 'middlewares/jwtMiddleware';
 import config from 'config/appConfig';
