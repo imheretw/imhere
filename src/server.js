@@ -1,19 +1,28 @@
+import path from 'path';
 import dotenv from 'dotenv';
 import Server from 'framework/Server';
 import JobHandler from 'app/boots/JobHandler';
 import PassportHandler from 'app/boots/PassportHandler';
 import config from 'config/appConfig';
+import routes from 'app/routes';
 
 dotenv.config();
 
-const server = new Server({ config });
+// path to root directory of this app
+const rootPath = path.normalize(__dirname);
 
-server.start();
+config.path = {
+  view: path.join(rootPath, 'app/views'),
+  static: path.join(rootPath, 'static'),
+};
 
-// start background jobs handler
-server.addHandlers([
-  new JobHandler(),
-  new PassportHandler(),
-]);
+const server = new Server({ config, routes });
+
+server
+  .start()
+  .addHandlers([
+    new JobHandler(),
+    new PassportHandler(),
+  ]);
 
 export default server.core;
