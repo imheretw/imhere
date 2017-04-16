@@ -15,15 +15,15 @@ import kue from 'kue';
 import Logger from 'Logger';
 
 // local
-import config from 'config/appConfig';
 import routes from 'app/routes';
 
 export default class Server {
-  constructor() {
-    this._logger = new Logger('App');
+  constructor(options) {
+    this._logger = new Logger('Server');
     this._app = null;
     this._core = null;
     this._handlers = [];
+    this._config = options.config;
   }
 
   start() {
@@ -103,7 +103,7 @@ export default class Server {
         res.render('error', {
           status: sc,
           message: err.message,
-          stack: config.env === 'development' ? err.stack : '',
+          stack: this._config.env === 'development' ? err.stack : '',
         });
       } else {
         res.json({
@@ -115,8 +115,8 @@ export default class Server {
 
   _initCore() {
     // START AND STOP
-    this._core = this._app.listen(config.port, () => {
-      this._logger.info(`listening on port ${config.port}`);
+    this._core = this._app.listen(this._config.port, () => {
+      this._logger.info(`listening on port ${this._config.port}`);
     });
     process.on('SIGINT', () => {
       this._logger.info('shutting down!');

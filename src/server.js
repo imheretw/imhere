@@ -2,10 +2,11 @@ import dotenv from 'dotenv';
 import Server from 'framework/Server';
 import JobHandler from 'app/boots/JobHandler';
 import PassportHandler from 'app/boots/PassportHandler';
+import config from 'config/appConfig';
 
 dotenv.config();
 
-const server = new Server();
+const server = new Server({ config });
 
 server.start();
 
