@@ -27,7 +27,7 @@ server
     new JobHandler(),
     new PassportHandler(),
   ])
-  .addPlugin('/api/github-demo', GithubDemoPlugin)
+  .addPlugin('/github-demo', GithubDemoPlugin)
   .start();
 
 export default server;

@@ -90,7 +90,7 @@ export const PATHS = {
 export const ALL = new Set([...PATHS.assets, PATHS.scripts, ...PATHS.transpile]);
 
 // client-related set
-export const CLIENT = [...PATHS.assets, PATHS.scripts];
+export const CLIENT = [...PATHS.assets, PATHS.scripts, ...PATHS.views];
 
 export const TRANSPILE = new Set(PATHS.transpile);
 
