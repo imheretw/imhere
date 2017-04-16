@@ -1,34 +1,37 @@
 import winston from 'winston';
 
-export default function Logger(prefix) {
-  const logger = new winston.Logger({
-    transports: [
-      new winston.transports.Console({
-        level: process.env.DEBUG_LEVEL,
-        timestamp: true,
-        stderrLevels: ['error'],
-        colorize: true,
-      }),
-      new (winston.transports.File)({
-        name: 'kidguard.debug.log',
-        filename: 'logs/debug.log',
-        humanReadableUnhandledException: true,
-        json: false,
-        level: 'debug',
-      }),
-    ],
-  });
+export default class Logger {
+  constructor(prefix) {
+    this._prefix = prefix;
+    this._logger = new winston.Logger({
+      transports: [
+        new winston.transports.Console({
+          level: process.env.DEBUG_LEVEL,
+          timestamp: true,
+          stderrLevels: ['error'],
+          colorize: true,
+        }),
+        new (winston.transports.File)({
+          name: 'kidguard.debug.log',
+          filename: 'logs/debug.log',
+          humanReadableUnhandledException: true,
+          json: false,
+          level: 'debug',
+        }),
+      ],
+    });
 
-  const levels = ['debug', 'verbose', 'info', 'warn', 'error'];
+    ['debug', 'verbose', 'info', 'warn', 'error'].forEach((level) => {
+      this[level] = (...args) => this._log('debug', args);
+    });
+  }
 
-  return levels.reduce((acc, level) => {
-    // add prefix
-    acc[level] = (...args) => logger[level](...formatLog(prefix, args));
+  _log(level, args) {
+    const newArgs = this._appendPrefix(args);
+    this._logger[level](...newArgs);
+  }
 
-    return acc;
-  }, {});
-}
-
-function formatLog(prefix, args) {
-  return prefix ? [`${prefix}:`, ...args] : [...args];
+  _appendPrefix(args) {
+    return this._prefix ? [`${this._prefix}:`, ...args] : [...args];
+  }
 }
