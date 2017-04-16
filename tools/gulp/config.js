@@ -44,6 +44,10 @@ export const PATHS = {
     name: 'views',
     src: path.join(SRC, 'app/views/**/*.pug'),
     dest: path.join(DEST, 'app/views'),
+  }, {
+    name: 'views',
+    src: path.join(SRC, 'plugins/**/*.pug'),
+    dest: path.join(DEST, 'plugins'),
   }],
 
   // server

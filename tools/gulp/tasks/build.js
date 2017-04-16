@@ -150,12 +150,14 @@ gulp.task('fonts', (done) => {
 });
 
 // copy views over to destination
-gulp.task('views', () =>
-  gulp.src(PATHS.views[0].src)
-    .pipe($.changed(PATHS.views[0].dest))
-    .pipe(gulp.dest(PATHS.views[0].dest))
-    .pipe($.print(fp => `view: ${fp}`))
-);
+gulp.task('views', () => {
+  PATHS.views.forEach((view) => {
+    gulp.src(view.src)
+      .pipe($.changed(view.dest))
+      .pipe(gulp.dest(view.dest))
+      .pipe($.print(fp => `view: ${fp}`));
+  });
+});
 
 // symlink package.json and node_modules to destination
 gulp.task('ln', () =>

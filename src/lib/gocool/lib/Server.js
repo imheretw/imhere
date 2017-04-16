@@ -16,6 +16,7 @@ export default class Server {
     this._logger = new Logger('Server');
     this._app = null;
     this._expressServer = null;
+    this._views = [];
     this._handlers = [];
     this._config = config;
 
@@ -28,6 +29,7 @@ export default class Server {
     this._logger.debug('Starting Server...');
 
     this._initRoutes();
+    this._initViews();
     this._initExpressServer();
 
     return this;
@@ -50,12 +52,60 @@ export default class Server {
     return this;
   }
 
+  addViews(views) {
+    if (views && views.length) {
+      this._views = [
+        ...this._views,
+        ...views,
+      ];
+    }
+
+    return this;
+  }
+
   addPlugin(routePath, Plugin) {
     const plugin = new Plugin();
     const routes = plugin.getRoutes();
+    const views = plugin.getViews();
+
     this._app.use(routePath, routes);
+    this.addViews(views);
 
     return this;
+  }
+
+  _initApp() {
+    // EXPRESS SET-UP
+    // create app
+    this._app = express();
+
+    // use pug and set views and static directories
+    this._app.set('view engine', 'pug');
+
+    this.addViews([this._config.path.view]);
+
+    this._app.use(express.static(this._config.path.static));
+
+    // add middlewares
+    this._app.use(bodyParser.json({
+      verify(req, res, buf) {
+        req.rawBody = buf;
+      },
+    }));
+    this._app.use(bodyParser.urlencoded({
+      extended: true,
+      verify(req, res, buf) {
+        req.rawBody = buf;
+      },
+    }));
+    this._app.use(compress());
+    this._app.use(cookieParser());
+    this._app.use(helmet());
+    this._app.use(params.expressMiddleware());
+
+    // passport for authenticate
+    this._app.use(passport.initialize());
+    this._app.use(passport.session());
   }
 
   _initRoutes() {
@@ -99,36 +149,8 @@ export default class Server {
     return this;
   }
 
-  _initApp() {
-    // EXPRESS SET-UP
-    // create app
-    this._app = express();
-
-    // use pug and set views and static directories
-    this._app.set('view engine', 'pug');
-    this._app.set('views', this._config.path.view);
-    this._app.use(express.static(this._config.path.static));
-
-    // add middlewares
-    this._app.use(bodyParser.json({
-      verify(req, res, buf) {
-        req.rawBody = buf;
-      },
-    }));
-    this._app.use(bodyParser.urlencoded({
-      extended: true,
-      verify(req, res, buf) {
-        req.rawBody = buf;
-      },
-    }));
-    this._app.use(compress());
-    this._app.use(cookieParser());
-    this._app.use(helmet());
-    this._app.use(params.expressMiddleware());
-
-    // passport for authenticate
-    this._app.use(passport.initialize());
-    this._app.use(passport.session());
+  _initViews() {
+    this._app.set('views', this._views);
   }
 
   _initExpressServer() {
