@@ -1,7 +1,7 @@
-import BaseController from 'controllers/BaseController';
+import { Controller } from 'framework';
 import GithubService from 'services/GithubService';
 
-export default class GithubController extends BaseController {
+export default class GithubController extends Controller {
   async closedIssues() {
     const issues = await GithubService.getClosedIssues();
 

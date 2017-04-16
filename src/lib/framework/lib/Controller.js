@@ -1,4 +1,4 @@
-export default class BaseController {
+export default class Controller {
 
   static action(name) {
     const controller = new this();

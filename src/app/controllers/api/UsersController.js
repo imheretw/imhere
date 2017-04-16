@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import bcrypt from 'bcrypt';
 
-import BaseController from 'controllers/BaseController';
+import { Controller } from 'framework';
 import User from 'models/user';
 import jwtMiddleware from 'middlewares/jwtMiddleware';
 import config from 'config/appConfig';
@@ -11,7 +11,7 @@ import Logger from 'Logger';
 const logger = new Logger('UserController');
 const expiresIn = 60 * 60 * 24 * 30;
 
-export default class UserController extends BaseController {
+export default class UserController extends Controller {
   constructor() {
     super();
     // TODO: support this.before(['action-1', 'action-2'], middleware);
