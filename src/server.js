@@ -1,10 +1,13 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import { Server } from 'gocool';
+
 import JobHandler from 'app/boots/JobHandler';
 import PassportHandler from 'app/boots/PassportHandler';
 import config from 'config/appConfig';
 import routes from 'app/routes';
+
+import GithubDemoPlugin from 'gocool-github-demo-plugin';
 
 dotenv.config();
 
@@ -24,6 +27,7 @@ server
     new JobHandler(),
     new PassportHandler(),
   ])
+  .addPlugin('/api/github-demo', GithubDemoPlugin)
   .start();
 
 export default server;

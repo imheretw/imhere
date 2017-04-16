@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import GithubService, { GITHUB_API_ENDPOINTS } from 'services/GithubService';
-import httpMocks from 'helpers/httpMocks';
-import githubClosedIssueData from 'data/api/github/issues/closed.json';
+import GithubService, { GITHUB_API_ENDPOINTS } from '../../lib/services/GithubService';
+import httpMocks from '../helpers/httpMocks';
+import githubClosedIssueData from '../data/github/issues/closed.json';
 
 describe('Test GithubService', () => {
   describe('getClosedIssues()', () => {

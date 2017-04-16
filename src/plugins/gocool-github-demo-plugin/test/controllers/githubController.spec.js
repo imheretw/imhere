@@ -1,14 +1,14 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import { GITHUB_API_ENDPOINTS } from 'services/GithubService';
-import httpMocks from 'helpers/httpMocks';
-import githubClosedIssueData from 'data/api/github/issues/closed.json';
-import server from 'server';
+import server from 'server'; // TODO: need to fix dependency
+import { GITHUB_API_ENDPOINTS } from '../../lib/services/GithubService';
+import httpMocks from '../helpers/httpMocks';
+import githubClosedIssueData from '../data/github/issues/closed.json';
 
 chai.use(chaiHttp);
 
 describe('Test github controller', () => {
-  describe('GET /api/github/closed_issues', () => {
+  describe('GET /api/github-demo/closed_issues', () => {
     it('should return closed issues', async () => {
       const [owner, repo] = ['imheretw', 'imhere'];
 
@@ -17,7 +17,7 @@ describe('Test github controller', () => {
         .reply(200, githubClosedIssueData);
 
       const res = await chai.request(server.expressServer)
-        .get('/api/github/closed_issues');
+        .get('/api/github-demo/closed_issues');
 
       const issues = res.body.issues;
       expect(res.status).to.equal(200);

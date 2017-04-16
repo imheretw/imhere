@@ -1,0 +1,4 @@
+{
+  "name": "gocool-github-demo-plugin",
+  "main": "lib/index.js"
+}

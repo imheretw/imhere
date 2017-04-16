@@ -4,7 +4,7 @@
     "development": {
       "plugins": [
         ["module-resolver", {
-          "root": ["./src/app", "./src/lib", "./src", "./test"],
+          "root": ["./src/app", "./src/lib", "./src/plugins", "./src", "./test"],
         }],
         [
           "transform-runtime", {

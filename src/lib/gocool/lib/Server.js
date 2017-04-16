@@ -18,7 +18,8 @@ export default class Server {
     this._expressServer = null;
     this._handlers = [];
     this._config = config;
-    this._routes = routes;
+
+    this.setRoutes(routes);
 
     this._initApp();
   }
@@ -33,7 +34,7 @@ export default class Server {
   }
 
   setRoutes(routes) {
-    this._routes = routes;
+    this._routes = routes || [];
 
     return this;
   }
@@ -49,7 +50,15 @@ export default class Server {
     return this;
   }
 
-  _initRoutes(routes) {
+  addPlugin(routePath, Plugin) {
+    const plugin = new Plugin();
+    const routes = plugin.getRoutes();
+    this._app.use(routePath, routes);
+
+    return this;
+  }
+
+  _initRoutes() {
     // use kue for background jobs handler
     // visit http://localhost:5000/kue to see queued background jobs
     this._app.use('/kue', kue.app);
