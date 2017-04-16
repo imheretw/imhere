@@ -15,7 +15,7 @@ export default class Server {
   constructor({ config, routes }) {
     this._logger = new Logger('Server');
     this._app = null;
-    this._core = null;
+    this._expressServer = null;
     this._handlers = [];
     this._config = config;
     this._routes = routes;
@@ -25,7 +25,7 @@ export default class Server {
     this._logger.debug('Starting Server...');
 
     this._initApp();
-    this._initCore();
+    this._initExpressServer();
 
     return this;
   }
@@ -109,15 +109,15 @@ export default class Server {
     });
   }
 
-  _initCore() {
+  _initExpressServer() {
     // START AND STOP
-    this._core = this._app.listen(this._config.port, () => {
+    this._expressServer = this._app.listen(this._config.port, () => {
       this._logger.info(`Started server and listening on port ${this._config.port}`);
     });
 
     process.on('SIGINT', () => {
       this._logger.info('Server shutting down!');
-      this._core.close();
+      this._expressServer.close();
       process.exit();
     });
 
@@ -128,7 +128,7 @@ export default class Server {
     });
   }
 
-  get core() {
-    return this._core;
+  get expressServer() {
+    return this._expressServer;
   }
 }

@@ -25,4 +25,4 @@ server
     new PassportHandler(),
   ]);
 
-export default server.core;
+export default server;
