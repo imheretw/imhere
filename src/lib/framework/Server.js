@@ -11,12 +11,11 @@ import passport from 'passport';
 import params from 'strong-params';
 import kue from 'kue';
 
-// local
+// lib
 import Logger from 'Logger';
-import database from 'database';
+
+// local
 import config from 'config/appConfig';
-import JobHandler from 'app/boots/JobHandler';
-import PassportHandler from 'app/boots/PassportHandler';
 import routes from 'app/routes';
 
 export default class Server {
@@ -24,6 +23,7 @@ export default class Server {
     this._logger = new Logger('App');
     this._app = null;
     this._core = null;
+    this._handlers = [];
   }
 
   start() {
@@ -33,6 +33,15 @@ export default class Server {
     return this;
   }
 
+  addHandlers(handlers) {
+    this._handlers = [
+      ...this._handlers,
+      ...handlers,
+    ];
+
+    handlers.forEach(handler => handler.start());
+  }
+
   _initApp() {
     // EXPRESS SET-UP
     // create app
@@ -40,10 +49,6 @@ export default class Server {
 
     // path to root directory of this app
     const rootPath = path.normalize(__dirname);
-
-    // start background jobs handler
-    new JobHandler().start();
-    new PassportHandler().start();
 
     // use pug and set views and static directories
     this._app.set('view engine', 'pug');
@@ -115,7 +120,6 @@ export default class Server {
     });
     process.on('SIGINT', () => {
       this._logger.info('shutting down!');
-      database.close();
       this._core.close();
       process.exit();
     });
