@@ -11,13 +11,12 @@ import passport from 'passport';
 import params from 'strong-params';
 import kue from 'kue';
 
-import 'config/passportConfig';
-
 // local
 import Logger from 'Logger';
 import database from 'database';
 import config from 'config/appConfig';
 import JobHandler from 'app/boots/JobHandler';
+import PassportHandler from 'app/boots/PassportHandler';
 import routes from 'app/routes';
 
 export default class Server {
@@ -44,6 +43,7 @@ export default class Server {
 
     // start background jobs handler
     new JobHandler().start();
+    new PassportHandler().start();
 
     // use pug and set views and static directories
     this._app.set('view engine', 'pug');
