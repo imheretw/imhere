@@ -32,6 +32,7 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": 1,
 
     "no-unused-expressions": 0,
     "chai-friendly/no-unused-expressions": 2
