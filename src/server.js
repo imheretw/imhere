@@ -1,3 +1,10 @@
+import dotenv from 'dotenv';
 import Server from 'framework/Server';
 
-export default new Server().core;
+dotenv.config();
+
+const server = new Server();
+
+server.start();
+
+export default server.core;

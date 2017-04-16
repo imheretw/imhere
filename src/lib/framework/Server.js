@@ -9,7 +9,6 @@ import express from 'express';
 import helmet from 'helmet';
 import passport from 'passport';
 import params from 'strong-params';
-import dotenv from 'dotenv';
 import kue from 'kue';
 
 import 'config/passportConfig';
@@ -23,13 +22,22 @@ import routes from 'app/routes';
 
 export default class Server {
   constructor() {
-    dotenv.config();
+    this._logger = new Logger('App');
+    this._app = null;
+    this._core = null;
+  }
 
-    const logger = new Logger('App');
+  start() {
+    this._initApp();
+    this._initCore();
 
+    return this;
+  }
+
+  _initApp() {
     // EXPRESS SET-UP
     // create app
-    const app = express();
+    this._app = express();
 
     // path to root directory of this app
     const rootPath = path.normalize(__dirname);
@@ -38,51 +46,51 @@ export default class Server {
     new JobHandler().start();
 
     // use pug and set views and static directories
-    app.set('view engine', 'pug');
-    app.set('views', path.join(rootPath, 'app/views'));
-    app.use(express.static(path.join(rootPath, 'static')));
+    this._app.set('view engine', 'pug');
+    this._app.set('views', path.join(rootPath, 'app/views'));
+    this._app.use(express.static(path.join(rootPath, 'static')));
 
     // add middlewares
-    app.use(bodyParser.json({
+    this._app.use(bodyParser.json({
       verify(req, res, buf) {
         req.rawBody = buf;
       },
     }));
-    app.use(bodyParser.urlencoded({
+    this._app.use(bodyParser.urlencoded({
       extended: true,
       verify(req, res, buf) {
         req.rawBody = buf;
       },
     }));
-    app.use(compress());
-    app.use(cookieParser());
-    app.use(helmet());
-    app.use(params.expressMiddleware());
+    this._app.use(compress());
+    this._app.use(cookieParser());
+    this._app.use(helmet());
+    this._app.use(params.expressMiddleware());
 
     // use kue for background jobs handler
     // visit http://localhost:5000/kue to see queued background jobs
-    app.use('/kue', kue.app);
+    this._app.use('/kue', kue.app);
 
     // passport for authenticate
-    app.use(passport.initialize());
-    app.use(passport.session());
+    this._app.use(passport.initialize());
+    this._app.use(passport.session());
 
     // set all controllers
-    app.use('/', routes);
+    this._app.use('/', routes);
 
     // catch 404 and forward to error handler
-    app.use((req, res, next) => {
+    this._app.use((req, res, next) => {
       const err = new Error('Route Not Found');
       err.statusCode = 404;
       next(err);
     });
 
     // general errors
-    app.use((err, req, res, next) => {
+    this._app.use((err, req, res, next) => {
       const sc = err.statusCode || 500;
       res.status(sc);
 
-      logger.error(
+      this._logger.error(
         'Error on status', sc, err.stack
       );
 
@@ -98,21 +106,23 @@ export default class Server {
         });
       }
     });
+  }
 
+  _initCore() {
     // START AND STOP
-    this._core = app.listen(config.port, () => {
-      logger.info(`listening on port ${config.port}`);
+    this._core = this._app.listen(config.port, () => {
+      this._logger.info(`listening on port ${config.port}`);
     });
     process.on('SIGINT', () => {
-      logger.info('shutting down!');
+      this._logger.info('shutting down!');
       database.close();
       this._core.close();
       process.exit();
     });
 
     process.on('uncaughtException', (error) => {
-      logger.error(`uncaughtException: ${error.message}`);
-      logger.error(error.stack);
+      this._logger.error(`uncaughtException: ${error.message}`);
+      this._logger.error(error.stack);
       process.exit(1);
     });
   }
