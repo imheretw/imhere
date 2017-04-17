@@ -8,7 +8,7 @@ import githubClosedIssueData from '../data/github/issues/closed.json';
 chai.use(chaiHttp);
 
 describe('Test github controller', () => {
-  describe('GET /api/github-demo/closed_issues', () => {
+  describe('GET /github-demo/api/closed_issues', () => {
     it('should return closed issues', async () => {
       const [owner, repo] = ['imheretw', 'imhere'];
 
@@ -17,7 +17,7 @@ describe('Test github controller', () => {
         .reply(200, githubClosedIssueData);
 
       const res = await chai.request(server.expressServer)
-        .get('/api/github-demo/closed_issues');
+        .get('/github-demo/api/closed_issues');
 
       const issues = res.body.issues;
       expect(res.status).to.equal(200);
